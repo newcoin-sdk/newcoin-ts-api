@@ -282,15 +282,38 @@ export type NCMintNftToRoot = {
   payer_prv_key: string
 }
 
-export type NCBindCollection = {
-  creator:  string,
-  col_name: string,
-  description: string,
-  image: string,
-  payer: string,
+export type NCMintLink = {
+  creator:  string, // 
+  col_name: string, // which collection to put the link, e.g. creator's root collection
+  subj_name: string, 
+  subj_type: string,
+  description?: string,
+  image?: string,
+  payer:         string,
   payer_prv_key: string
 };
 
+export type NCMintLike = {
+  issuer:     string,     // 
+  col_name?:  string,     // which collection to put the link, e.g. creator's root collection
+
+  subj_type:   string,     // what is being liked
+  subj_name:     string,     // specific name
+  value?:      string,      // deeplike? 0-100
+
+  payer?:        string, 
+  payer_prv_key: string
+};
+
+export type NCMintBadge = {
+  issuer:           string;
+  badge_name:       string; 
+  col_name?:        string; // by default root collection of the creator
+  subj_name:         string; // account name subject of a badge, can be DID or local account name
+  weight:           string; // 0/1 for boolean
+  payer:            string,
+  payer_prv_key:    string
+}
 
 export type NCMintProfile = {
 
@@ -381,7 +404,7 @@ export type NCReturnTxs = {
   TxID_createAcc?: string;
   TxID_createCol?: string;
   TxID_createSch?: string;
-  TxID_createTpl?: string;
+  TxID_createTpl?: string; template_id?: string;
 
   TxID_createPerm?: string;
   TxID_linkPerm?: string;
@@ -410,7 +433,6 @@ export type NCReturnTxs = {
   TxID_mintProfile?: string; 
   TxID_mintFile?: string; 
   TxID_changeFile?: string;
-  TxID_bindCollection?: string;
 
   TxID_txNcoBalance?: string;
   TxID?: string;

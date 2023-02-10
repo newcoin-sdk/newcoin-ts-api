@@ -1,13 +1,13 @@
-import { NCInit, NCInitServices, NCInitUrls }  from "./io/system";
-import { NCCreateUser, NCReturnTxs, NCBuyRam } from "./types";
+import { NCInit, NCInitServices, NCInitUrls }  from "../system";
+import { NCCreateUser, NCCreatePermission, NCLinkPerm, NCReturnTxs, NCBuyRam, NCKeyPair } from "../types";
 import { TransactResult } from "eosjs/dist/eosjs-api-interfaces";
-import { ActionGenerator as sdkActionGen } from "./actions";
 import { NCO_submit_API } from "./submit"
-import { NCO_utils_API } from "./utils";
+import { NCO_utils_API } from "../utils";
+import { ActionGenerator as sdkActionGen } from "./actions";
+const ecc = require("eosjs-ecc-priveos");
 
-export { NCO_account_API }
 
-class NCO_account_API {
+export class NCO_account_API {
     private debug    : boolean;
     private services : NCInitServices;
     // @ts-ignore
@@ -24,7 +24,6 @@ class NCO_account_API {
         this.submitter  = new NCO_submit_API(inpt);
         this.sdkGen     = new sdkActionGen(this.services.eosio_contract, this.services.token_contract);
         this.utils      = new NCO_utils_API(inpt);
-        this.urls       = inpt.urls;
     }
 
     SubmitTx = (
@@ -38,13 +37,28 @@ class NCO_account_API {
             private_keys);  // testnet ["5KdRwMUrkFssK2nUXASnhzjsN1rNNiy8bXAJoHYbBgJMLzjiXHV"])
         }
     
+
+
+  /**
+   * Create a key pair assuming a secure environment (not frontend)
+   * @params none
+   * @returns An EOS key pair
+   */
+  async createKeyPair() {
+    await ecc.initialize();
+    let opts = { secureEnv: true };
+    let p = await ecc.randomKey(0, opts);
+    let t: NCKeyPair = { prv_key: p, pub_key: ecc.privateToPublic(p) };
+    return t as NCKeyPair;
+  }
+
     /**
    * Create a user - multistage operation creating new user account, 
    * defailt collection, schema and template for the account
    * @param NCCreateUser
    * @returns NCReturnTxs
    */
-    async createUser(inpt: NCCreateUser) {
+    async createAccount(inpt: NCCreateUser) {
 
             const CREATE_ACCOUNT_DEFAULTS = {
               ram_amt: 8192,
@@ -85,6 +99,59 @@ class NCO_account_API {
             [inpt.payer_prv_key]
           ) as TransactResult;// [] contained       
           return { TxID_createAcc: tres.transaction_id, TxID: tres.transaction_id, originalResponse: tres } as NCReturnTxs;
-        
-         }
+      }
+          
+    
+  /**
+   * Create a new permission subordinate to the Active permission. 
+   * (future optional: allow under owner, TBD)
+   * @param NCCreatePermission
+   * @returns Create permission transaction id
+   */
+  async createPermission(inpt: NCCreatePermission) {
+    let t = this.sdkGen.createPermission(inpt.author, inpt.perm_name, inpt.perm_pub_key);
+    let res = await this.submitter.SubmitTx([t],[],[inpt.author_prv_active_key]) as TransactResult;
+    let r: NCReturnTxs = {};
+    r.TxID_createPerm = res.transaction_id;
+    return r;
+  }
+
+  /**
+   * Link a permission to a specific action of a specific contract. 
+   * @param NCLinkPerm
+   * author: the permission's owner to be linked  
+   * code: the owner of the action to be linked                                         
+   * type: the action to be linked                                                      
+   * 'active', 'owner' ...                                                        
+   * @returns Link permission transaction id
+   */
+  async linkPermission(inpt: NCLinkPerm) {
+    const linkauth_input = {
+      account: inpt.author,             // this link
+      code: inpt.action_owner,          // 
+      type: inpt.action_to_link,        // 
+      requirement: inpt.perm_to_link,   // 
+    };
+
+    // the action which will make the linking 
+    let action = {
+      account: 'eosio',
+      name: 'linkauth',
+      data: linkauth_input,
+      authorization: [{
+        actor: inpt.author,
+        permission: 'active'
+      }]
+    };
+
+    let res = await this.submitter.SubmitTx([action],
+      [],
+      [inpt.author_prv_active_key]
+    ) as TransactResult;
+    let r: NCReturnTxs = {};
+    r.TxID_linkPerm = res.transaction_id;
+    return r;
+  }
+
+
 }

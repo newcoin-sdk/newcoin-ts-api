@@ -1,24 +1,26 @@
 // EOS imports
 import { RpcError } from "eosjs";
 import { TransactResult } from "eosjs/dist/eosjs-api-interfaces";
-const ecc = require("eosjs-ecc-priveos");
 
 // Extra backend services
-import { JsonRpc as HJsonRpc } from "@eoscafe/hyperion";
+// import { JsonRpc as HJsonRpc } from "@eoscafe/hyperion";
 
 // Newcoin services  
 //@ts-ignore
 import { ChainApi as PoolsRpcApi } from '@newfound8ion/newcoin.pools-js'
-import { ActionGenerator as sdkActionGen, EosioActionObject } from "./actions";
-import { RpcApi as AaRpcApi } from "atomicassets";
-import { NCO_account_API } from "./accounts";
-import { NCO_daos_API } from "./daos";
-import { NCO_submit_API } from "./submit";
-import { NCO_pools_API } from "./pools";
+import { ActionGenerator as sdkActionGen, EosioActionObject } from "./L1/actions";
+//import { RpcApi as AaRpcApi } from "atomicassets";
+
+import { NCO_account_API } from "./L1/accounts";
+import { NCO_daos_API } from "./L1/daos";
+import { NCO_submit_API } from "./L1/submit";
+import { NCO_pools_API } from "./L1/pools";
+import { NCO_assets_API } from "./L1/assets";
+import { NCO_read_API } from "./L1/reader";
+import { NCO_tx_API } from "./L1/transfers";
 import { NCO_utils_API } from "./utils";
 
 import fetch from 'cross-fetch';
-
 
 //@ts-ignore
 import {
@@ -30,14 +32,17 @@ import {
   NCCreateDaoProposal, NCCreateDaoUserWhitelistProposal, NCCreateDaoStakeProposal,
   NCApproveDaoProposal, NCExecuteDaoProposal, NCGetVotes, 
   NCGetDaoProposals, NCDaoProposalVote, NCDaoWithdrawVoteDeposit,
-
-  NCMintAsset, NCMintNftToRoot, NCBindCollection, NCMintFile, NCCreatePermission,
-  NCGetAccInfo, NCGetPoolInfo, NCLinkPerm,
+  NCCreatePermission, NCGetAccInfo, NCGetPoolInfo, NCLinkPerm,
   NCPoolsInfo, NCNameType, NCSwapNCOtoCC,
-  NCReturnTxs, NCReturnInfo, NCTxBal, NCTxNcoBal, NCKeyValPair, NCChangeFile, NCModifyAsset, NCMintProfile
+  NCReturnTxs, NCReturnInfo, NCTxBal, NCTxNcoBal, NCKeyValPair, NCMintBadge,
 } from "./types";
 
-import { default_schema, id_vc_schema, bind_schema, file_schema, profile_schema} from "./schemas"
+import {
+  NCMintAsset, NCMintNftToRoot, NCMintLink, NCMintFile, NCMintLike, NCChangeFile, NCModifyAsset, NCMintProfile
+} from "./types";
+
+// @ts-ignore
+import { default_nft_schema, file_schema, link_schema, profile_schema, like_link_template, badge_link_template } from "./schemas"
 
 
 export {
@@ -47,20 +52,19 @@ export {
   NCStakeMainDao, 
   NCCreateDao, NCGetDaoWhiteList, NCCreateDaoProposal, NCCreateDaoUserWhitelistProposal, NCCreateDaoStakeProposal,
   NCApproveDaoProposal, NCExecuteDaoProposal, NCGetVotes, NCGetDaoProposals, NCDaoProposalVote, NCDaoWithdrawVoteDeposit,
-  NCMintAsset,  NCBindCollection, NCMintFile, NCCreatePermission,
+  NCMintAsset,  NCMintLink, NCMintFile, NCCreatePermission,
   NCGetAccInfo, NCGetPoolInfo, NCLinkPerm,
   NCPoolsInfo, NCNameType,
   NCReturnTxs, NCReturnInfo, NCTxBal, NCTxNcoBal, NCChangeFile, NCModifyAsset, NCMintProfile,
   devnet_services, devnet_urls
 };
 
-export { default_schema, id_vc_schema, bind_schema, file_schema, profile_schema };
+export { default_nft_schema, link_schema, file_schema, profile_schema };
 
 import { getClaimNftsActions, getClaimWinBidActions, getCreateAuctionActions, getEditAuctionActions, getEraseAuctionActions, getPlaceBidActions } from "./neftymarket";
 import { NCClaimNftsParams, NCClaimWinBidParams, NCCreateAuctionParams, NCEditAuctionParams, NCEraseAuctionParams, NeftyMarketParamsBase, NCPlaceBidParams } from "./neftymarket/types";
-import { readAsset } from "./io/nft";
-import { NCInit, NCInitUrls, NCInitServices, devnet_urls, devnet_urls_prod, devnet_services } from "./io/system";
-import { NCO_assets_API } from "./assets";
+
+import { NCInit, NCInitUrls, NCInitServices, devnet_urls, devnet_urls_prod, devnet_services } from "./system";
 
 
 /**
@@ -72,30 +76,31 @@ import { NCO_assets_API } from "./assets";
  */
 export class NCO_BlockchainAPI {
 
-  private debug: boolean = false;
+  //@ts-ignore
   private urls: NCInitUrls;
   private services: NCInitServices;
+  private debug: boolean = false;
+  
   static defaults = {
     devnet_services,
     devnet_urls,
-    devnet_urls_prod,
-    default_schema
+    devnet_urls_prod
   };
 
   static system_names = {
   };
 
-  public daos: NCO_daos_API;
-  public pools: NCO_pools_API;
-  public  utils: NCO_utils_API;
-  public accounts: NCO_account_API;
-  public  assets: NCO_assets_API;
-  private submitter: NCO_submit_API;
-
-  // @ts-ignore
-  private aa_api: AaRpcApi;
-  private hrpc: HJsonRpc;
+  public daos:       NCO_daos_API;
+  public pools:      NCO_pools_API;
+  public utils:      NCO_utils_API;
+  public accounts:   NCO_account_API;
+  public assets:     NCO_assets_API;
+  public reader:     NCO_read_API;
+  public submitter:  NCO_submit_API;
+  public txer:       NCO_tx_API;
+  
   private sdkGen: sdkActionGen;
+
   /**
    * Init the api
    * @name newcoin-api
@@ -109,46 +114,41 @@ export class NCO_BlockchainAPI {
     this.debug      = n.debug;
     this.urls       = n.urls;
     this.services   = n.services;
+
+    this.submitter  = new NCO_submit_API(n);
+    this.reader     = new NCO_read_API(n);
+
     this.daos       = new NCO_daos_API(n);
     this.pools      = new NCO_pools_API(n);
-    this.submitter  = new NCO_submit_API(n);
     this.utils      = new NCO_utils_API(n);
     this.assets     = new NCO_assets_API(n);
     this.accounts   = new NCO_account_API(n);
-
-    this.hrpc       = new HJsonRpc(this.urls.hyperion_url, { fetch } as any);
+    this.txer       = new NCO_tx_API(n);
+    
+    //this.hrpc       = new HJsonRpc(this.urls.hyperion_url, { fetch } as any);
     this.sdkGen     = new sdkActionGen(this.services.eosio_contract, this.services.token_contract);
     
   }
 
-  // Native EOS services
-  /**
-   * Create a key pair assuming a secure environment (not frontend)
-   * @params none
-   * @returns An EOS key pair
-   */
-  async createKeyPair() {
-    await ecc.initialize();
-    let opts = { secureEnv: true };
-    let p = await ecc.randomKey(0, opts);
-    let t: NCKeyPair = { prv_key: p, pub_key: ecc.privateToPublic(p) };
-    return t as NCKeyPair;
+  async createUser(inpt: NCCreateUser) {
+    const rc= this.accounts.createAccount(inpt);
+    if((await rc).TxID_createAcc != undefined)
+      this.createRootCollection(inpt.newUser, inpt.newacc_pub_active_key);
   }
-
 
   /**
    * Create default collection for the account and schemes
-   * @param  NCCreateRootCollection
+   * @param  name, key
    * @returns Create Collection and template transactions' ids
    */
   async createRootCollection(name: string, key: string) {
 
-    let res: NCReturnTxs = {};
+    let res:  NCReturnTxs = {};
     let tres: TransactResult;
 
     const collection_name     = this.utils.getRootCollectionName(name);
     const def_schema_name     = this.utils.getRootCollectionNftSchemaName(name);
-    const bind_sch_name       = this.utils.getRootCollectionBindingSchemaName(name);   
+    const link_sch_name       = this.utils.getRootCollectionLinkSchemaName(name);   
     const profile_schema_name = this.utils.getRootCollectionProfileSchemaName(name); 
 
     let mkt_fee = 0.05;
@@ -163,7 +163,7 @@ export class NCO_BlockchainAPI {
 
     // ---- Schemas --- 
     if(this.debug) console.log("creating default NFT schema for root collection ");
-    let t1 = this.sdkGen.createSchema(name, collection_name, def_schema_name, default_schema);
+    let t1 = this.sdkGen.createSchema(name, collection_name, def_schema_name, default_nft_schema);
     if(this.debug) console.log(t1);
     if(this.debug) console.log("createsch NFT transaction");
     tres = await this.submitter.SubmitTx([t1],[],[key]) as TransactResult;
@@ -178,186 +178,132 @@ export class NCO_BlockchainAPI {
     res.TxID_createSch = tres.transaction_id;
     if(this.debug) console.log(tres);
 
-    if(this.debug) console.log("creating collection bind schema");
-    let t3 = this.sdkGen.createSchema(name, collection_name, bind_sch_name, bind_schema);
+    if(this.debug) console.log("creating collection link schema");
+    let t3 = this.sdkGen.createSchema(name, collection_name, link_sch_name, link_schema);
     if(this.debug) console.log(t3);
     if(this.debug) console.log("createsch collection bind transaction");
     tres = await this.submitter.SubmitTx([t3],[],[key]) as TransactResult;
     res.TxID_createSch = tres.transaction_id;
     if(this.debug) console.log(tres);
 
-    if(this.debug) console.log("creating template");
-    let template : any[] = [];
-    let xferable = false;
-    let burnable = false;
-    t = this.sdkGen.createTemplate(name, collection_name, def_schema_name, xferable, burnable, template);
-    if(this.debug) console.log(t);
-
-    if(this.debug) console.log("creating template transaction");
-    tres = await this.submitter.SubmitTx([t], [], [key] ) as TransactResult;
-    res.TxID_createTpl = res.TxID_createTpl;
-    if(this.debug) console.log(tres);
-
+    if(this.debug) console.log("creating like template");
+    let t4 = await this.createLikeTemplate(name, key);
+    res.TxID_createTpl = t4.TxID_createTpl;
+    res.template_id = t4.template_id;
+    if(this.debug) console.log("created like template" );
+    // create more templates
     return res;
   }
 
-  /**
-   * Create a new permission subordinate to the Active permission. 
-   * (future optional: allow under owner, TBD)
-   * @param NCCreatePermission
-   * @returns Create permission transaction id
-   */
-  async createPermission(inpt: NCCreatePermission) {
-    let t = this.sdkGen.createPermission(inpt.author, inpt.perm_name, inpt.perm_pub_key);
-    let res = await this.submitter.SubmitTx([t],[],[inpt.author_prv_active_key]) as TransactResult;
-    let r: NCReturnTxs = {};
-    r.TxID_createPerm = res.transaction_id;
-    return r;
-  }
-
-  /**
-   * Link a permission to a specific action of a specific contract. 
-   * @param NCLinkPerm
-   * author: the permission's owner to be linked  
-   * code: the owner of the action to be linked                                         
-   * type: the action to be linked                                                      
-   * 'active', 'owner' ...                                                        
-   * @returns Link permission transaction id
-   */
-  async linkPermission(inpt: NCLinkPerm) {
-    const linkauth_input = {
-      account: inpt.author,             // this link
-      code: inpt.action_owner,          // 
-      type: inpt.action_to_link,        // 
-      requirement: inpt.perm_to_link,   // 
-    };
-
-    // the action which will make the linking 
-    let action = {
-      account: 'eosio',
-      name: 'linkauth',
-      data: linkauth_input,
-      authorization: [{
-        actor: inpt.author,
-        permission: 'active'
-      }]
-    };
-
-    let res = await this.submitter.SubmitTx([action],
-      [],
-      [inpt.author_prv_active_key]
-    ) as TransactResult;
-    let r: NCReturnTxs = {};
-    r.TxID_linkPerm = res.transaction_id;
-    return r;
-  }
-
-  async swapNcoToCreatorCoin( inpt: NCSwapNCOtoCC ) { 
-    console.log("trying to swap to GNCO :  " + inpt.amt);
-    this.debug = true;
-
-    let n: NCStakeMainDao = { 
-      amt: inpt.amt, 
-      payer: inpt.payer,
-      payer_prv_key: inpt.payer_prv_key
-    };
-
-    let resp1  = await this.pools.stakeMainDAO(n) as NCReturnTxs;
-    if(this.debug) console.log(resp1);
-    //@ts-ignore
-    let gnco_amt= resp1.tx.processed.action_traces[0].inline_traces[3].act.data.quantity ;
-    
-    //@ts-ignore
-    /*let t = resp.tx.processed.action_traces[0].inline_traces ? resp.tx.processed.action_traces[0].inline_traces : [];
-    console.log(t[0]?t[0]:"undef");console.log("*");
-    console.log(t[1]?t[1]:"undef");console.log("*");
-    console.log(t[2]?t[2]:"undef");console.log("*");
-    console.log(t[3]?t[3]:"undef");console.log("*");*/
-    
-    // get how much GNCO was received
-    console.log("trying to swap to CC :  " + gnco_amt);
-    let m: NCStakePool = { 
-      owner: inpt.creator_to, 
-      amt:  gnco_amt, 
-      payer: inpt.payer,//'io',  
-      payer_prv_key: inpt.payer_prv_key
-    };      
-     
-    let resp2 = await this.pools.stakePool(m);
-    if(this.debug) console.log(resp2);
-    
-    return resp2;
-}
-
-  /** 
-   * 
-   */
-  async mintNftToRoot(inpt: NCMintNftToRoot) {
-    let s : NCMintAsset = {
-      creator:  inpt.creator,
-      col_name: this.utils.getRootCollectionName( inpt.creator ), // root collection
-      sch_name: this.utils.getRootCollectionNftSchemaName(inpt.creator), // bind schema
-      tmpl_id: -1,
-      immutable_data: inpt.immutable_data,
-      mutable_data: inpt.mutable_data,
-      payer: inpt.payer,
-      payer_prv_key: inpt.payer_prv_key
-    }
-
-    try { 
-      let mint_res  = await this.assets.mintAsset(s) ;
-      mint_res.TxID_mintNft = mint_res.TxID_mintAsset;
-      if (this.debug) { console.log("minted file: "); console.log(mint_res); }
-      return mint_res;
-    } catch(e) {
-      let err_no_col = "assertion failure with message: No collection with this name exists";
-      let err = (e as Error).message;
-      console.log("Error message:  " + err);
-      if (err != err_no_col) throw e;
-
-      let res = await this.createRootCollection(inpt.creator, inpt.payer_prv_key)
-      if(this.debug) { console.log("createcollection of root result: "); console.log(res); }
-
-      try { 
-        let mint_res  = await this.assets.mintAsset(s) ;
-        mint_res.TxID_mintNft = mint_res.TxID_mintAsset;
-        console.log("minted NFT to root ");
-        return mint_res;
-      } catch(e) {
-        let err = (e as Error).message;
-        console.log("Second Minting error message:  " + err);
-        throw e;
-      }
-    };
-
-  }
-
+  
   /**
    * Bind collection to root collection
    * @param inpt: NCAddCollection
    * @returns Create NFT in the root collection referring to 
    */
-   async bindCollectionToRoot(inpt: NCBindCollection) {
-      
+  /*async mintLinkTemplate(inpt: NCMintLinkTemplate) {
+    obj_type
+    link_type
+  } */
+  async createLikeTemplate(name: string, key: string)
+  {
+    let xferable = false;
+    let burnable = true;
+    const t = this.sdkGen.createTemplate(
+      name, 
+      this.utils.getRootCollectionName( name ), 
+      this.utils.getRootCollectionLinkSchemaName( name ), 
+      xferable, burnable, 
+      like_link_template
+    );
+   
+    let tres = await this.submitter.SubmitTx([t],[],[key]) ;
+    if(this.debug) console.log(tres);
+    let rc: NCReturnTxs = {};
+    rc.TxID_createTpl = tres.transaction_id;
+    rc.template_id = (await this.reader.txToTemplateId(tres.transaction_id)).toString();
+    return rc;
+
+  }
+
+
+  async mintLike(inpt: NCMintLike ) {
     // todo if no schema then create it
+
+    const tId = await this.utils.getLinkSchemaLikeTemplateID(inpt.issuer);
+    if (tId == undefined || tId == -1) this.createLikeTemplate(inpt.issuer, inpt.payer_prv_key);
+    const value = inpt.value??"0";
+
     let s : NCMintAsset = {
-      creator: inpt.creator,
-      col_name: this.utils.getRootCollectionName( inpt.creator ), // root collection
-      sch_name: this.utils.getRootCollectionBindingSchemaName(inpt.creator), // bind schema
-      tmpl_id: -1,
-      immutable_data: [    
-          {'key': 'name', 'value': ['string', inpt.col_name]},
-          {'key': 'description','value': ['string', inpt.description]}, 
-          {'key': 'image','value': ['string', inpt.image]}
+      creator:  inpt.issuer,
+      col_name: this.utils.getRootCollectionName( inpt.issuer ), // root collection
+      sch_name: this.utils.getRootCollectionLinkSchemaName(inpt.issuer), // bind schema
+      tmpl_id:  tId,
+      //this.utils.getLinkSchemaLikeTemplateName(inpt.creator),
+      // object: account name
+      immutable_data: [   
+        {'key': 'subj_name',   'value': ['string', inpt.subj_name]},
+        {'key': 'subj_type', 'value': ['string', inpt.subj_type]},   
+        {'key': 'prop_val', 'value': ['string', value]} 
       ],
       mutable_data: [],
       payer: inpt.payer,
       payer_prv_key: inpt.payer_prv_key
     };
     let resp = await this.assets.mintAsset(s);      
-    resp.TxID_bindCollection =  resp.TxID_mintAsset;
     return resp;
   }
+
+
+  async createBadgeTemplate(name: string, key: string, col?: string, sch?: string)
+  {
+    let xferable = true; // badges can be transferrable for collateral, burnability etc
+    let burnable = true;
+    const t = this.sdkGen.createTemplate(
+      name, 
+      col ?? this.utils.getRootCollectionName( name ), 
+      sch ?? this.utils.getRootCollectionLinkSchemaName( name ), 
+      xferable, burnable, 
+      badge_link_template
+    );
+   
+    let tres = await this.submitter.SubmitTx([t],[],[key]) ;
+    
+    if(this.debug) console.log("creating badge template result:");
+    if(this.debug) console.log(tres);
+
+    let rc: NCReturnTxs = {};
+    rc.TxID_createTpl = tres.transaction_id;
+    rc.template_id = (await this.reader.txToTemplateId(tres.transaction_id)).toString();
+    return rc;
+
+  }
+
+async mintBadge(inpt: NCMintBadge ) {
+  // todo if no schema then create it
+
+  const tId = await this.utils.getLinkSchemaBadgeTemplateID(inpt.issuer);
+  if (tId == undefined || tId == -1) this.createBadgeTemplate(inpt.issuer, inpt.payer_prv_key);
+
+  let s : NCMintAsset = {
+    creator:  inpt.issuer,
+    col_name: inpt.col_name ?? this.utils.getRootCollectionName( inpt.issuer ), // root collection
+    sch_name: this.utils.getRootCollectionLinkSchemaName(inpt.issuer), // bind schema
+    tmpl_id:  tId,
+    //this.utils.getLinkSchemaLikeTemplateName(inpt.creator),
+    // object: account name
+    immutable_data: [   
+      {'key': 'name',      'value': ['string', inpt.badge_name]},
+      {'key': 'subj_name',    'value': ['string', inpt.subj_name]},   
+      {'key': 'prop_val',  'value': ['string', inpt.weight??"0"]} 
+    ],
+    mutable_data: [],
+    payer: inpt.payer,
+    payer_prv_key: inpt.payer_prv_key
+  };
+  let resp = await this.assets.mintAsset(s);      
+  return resp;
+}
 
   // @ts-ignore
   static private const STATUS_LIST = {
@@ -416,19 +362,12 @@ export class NCO_BlockchainAPI {
       return resp;
 
   } 
-
-    //async mintSocialProof(inpt: NCMintSocialProof)
-    //{
-
-    //}
-
-
    /**
    * Create File
    * @param inpt: NCMintFile
    * @returns Create file transaction id
    */
-    async createFile(inpt: NCMintFile) {
+  async createFile(inpt: NCMintFile) {
 
       let col_name = this.utils.getFileCollectionName(inpt.creator);
       let sch_name = this.utils.getFileCollectionFileSchemaName(inpt.creator);
@@ -500,11 +439,11 @@ export class NCO_BlockchainAPI {
           throw e;
         }
       }; 
-    }
+  }
 
-    async changeFile(inpt: NCChangeFile) 
+  async changeFile(inpt: NCChangeFile) 
     {
-      const old = await readAsset(inpt.asset_id);
+      const old = await this.reader.readAsset(inpt.asset_id);
       console.log("changing file : ... " + JSON.stringify(old.mutable_data));
       let data = [
         {'key': 'name', 'value': ['string', inpt.new_name ?? old.mutable_data.name]},
@@ -527,78 +466,89 @@ export class NCO_BlockchainAPI {
       res.asset_id = inpt.asset_id;
       console.log("modify asset res: "+ JSON.stringify(res));
       return res;
+  }
+
+  /** 
+   * 
+   */
+  async mintNftToRoot(inpt: NCMintNftToRoot) {
+    let s : NCMintAsset = {
+      creator:  inpt.creator,
+      col_name: this.utils.getRootCollectionName( inpt.creator ), // root collection
+      sch_name: this.utils.getRootCollectionNftSchemaName(inpt.creator), // bind schema
+      tmpl_id: -1,
+      immutable_data: inpt.immutable_data,
+      mutable_data: inpt.mutable_data,
+      payer: inpt.payer,
+      payer_prv_key: inpt.payer_prv_key
     }
 
+    try { 
+      let mint_res  = await this.assets.mintAsset(s) ;
+      mint_res.TxID_mintNft = mint_res.TxID_mintAsset;
+      if (this.debug) { console.log("minted file: "); console.log(mint_res); }
+      return mint_res;
+    } catch(e) {
+      let err_no_col = "assertion failure with message: No collection with this name exists";
+      let err = (e as Error).message;
+      console.log("Error message:  " + err);
+      if (err != err_no_col) throw e;
 
+      let res = await this.createRootCollection(inpt.creator, inpt.payer_prv_key)
+      if(this.debug) { console.log("createcollection of root result: "); console.log(res); }
 
-  /**
-   * Get account balance
-   * @param acc: NCGetAccInfo
-   * @param acc.token_name will set correct contract
-   * @returns Tx data
-   */
-  async getAccountBalance(acc: NCGetAccInfo) {
+      try { 
+        let mint_res  = await this.assets.mintAsset(s) ;
+        mint_res.TxID_mintNft = mint_res.TxID_mintAsset;
+        console.log("minted NFT to root ");
+        return mint_res;
+      } catch(e) {
+        let err = (e as Error).message;
+        console.log("Second Minting error message:  " + err);
+        throw e;
+      }
+    };
 
-    if (!acc.contract) {
-
-      if (acc.token_name == "GNCO")
-        acc.contract = this.services.maindao_contract;
-      else
-        if (acc.token_name != "NCO")
-          acc.contract = this.services.staking_contract;
-        else
-          acc.contract = this.services.eosio_contract;
-    }
-
-    let rc: NCReturnInfo = { acc_balances: [] };
-    try {
-      let t = await fetch(`https://nodeos-dev.newcoin.org/v1/chain/get_currency_balance`, { // TODO
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          account: acc.owner,
-          code: acc.contract
-        }),
-      });
-      rc.acc_balances = await t.json();
-      //if(this.debug) if(this.debug) console.log(rc);
-      return rc;
-    } catch (e) {
-      if(this.debug) console.log('\nCaught exception: ' + e);
-      if (e instanceof RpcError && this.debug) console.log(JSON.stringify(e.json, null, 2));
-      throw e;
-    }
   }
 
-  /**
-   * Transfer GNCO between accounts
-   * @param NCTxBal
-   * @returns Transfer transaction id
-   */
-  async txGNCOBalance(inpt: NCTxBal) {
-    const r = await this._txBalance(this.services.maindao_contract, inpt);
-    return r;
-  }
 
-  /**
-   * Transfer NCO between accounts
-   * @param NCTxBal
-   * @returns Transfer transaction id
-   */
-  async txNCOBalance(inpt: NCTxBal) {
-    const r = await this._txBalance(this.services.token_contract, inpt);
-    return r;
-  }
+  async swapNcoToCreatorCoin( inpt: NCSwapNCOtoCC ) { 
+    console.log("trying to swap to GNCO :  " + inpt.amt);
+    this.debug = true;
 
-  /**
-   * Transfer creator tokens between accounts
-   * @param   NCTxBal 
-   * @returns Transfer transaction id
-   */
-  async txDAOTokenBalance(inpt: NCTxBal) {
-    const r = await this._txBalance(this.services.staking_contract, inpt);
-    return r;
+    let n: NCStakeMainDao = { 
+      amt: inpt.amt, 
+      payer: inpt.payer,
+      payer_prv_key: inpt.payer_prv_key
+    };
+
+    let resp1  = await this.pools.stakeMainDAO(n) as NCReturnTxs;
+    if(this.debug) console.log(resp1);
+    //@ts-ignore
+    let gnco_amt= resp1.tx.processed.action_traces[0].inline_traces[3].act.data.quantity ;
+    
+    //@ts-ignore
+    /*let t = resp.tx.processed.action_traces[0].inline_traces ? resp.tx.processed.action_traces[0].inline_traces : [];
+    console.log(t[0]?t[0]:"undef");console.log("*");
+    console.log(t[1]?t[1]:"undef");console.log("*");
+    console.log(t[2]?t[2]:"undef");console.log("*");
+    console.log(t[3]?t[3]:"undef");console.log("*");*/
+    
+    // get how much GNCO was received
+    console.log("trying to swap to CC :  " + gnco_amt);
+    let m: NCStakePool = { 
+      owner: inpt.creator_to, 
+      amt:  gnco_amt, 
+      payer: inpt.payer,//'io',  
+      payer_prv_key: inpt.payer_prv_key
+    };      
+     
+    let resp2 = await this.pools.stakePool(m);
+    if(this.debug) console.log(resp2);
+    
+    return resp2;
   }
+  
 
   /**
  * Get pool info
@@ -625,31 +575,7 @@ export class NCO_BlockchainAPI {
     ``
   }
   
-  /**
-   * Get trasaction data
-   * @returns Tx data
-   */
-   async getTxData(txid: string) {
-    let txi = await this.hrpc.get_transaction(txid);
-    if(this.debug) console.log(txi); // get template number  txi.actions[1].act.data.template_id
-    return txi;
-  }
-
   // AUX functions
-  /**
-   * Transfer NCO between accounts
-   * @returns Transfer transaction id
-   */
-    async _txBalance(contract: string, inpt: NCTxBal): Promise<NCReturnTxs> {
-      let r: NCReturnTxs = {};
-      let tx = this.sdkGen.txBalance(contract, inpt.payer, inpt.to, inpt.amt, inpt.memo ??= "");
-      let res = await this.submitter.SubmitTx([tx],
-        [],
-        [inpt.payer_prv_key]
-      ) as TransactResult;
-      r.TxID = res.transaction_id;
-      return r;
-    }
 
   // Neftymarket
   private getActionParams<T>(params: T): NeftyMarketParamsBase & T {
@@ -726,9 +652,13 @@ export class NCO_BlockchainAPI {
     const actions = getEditAuctionActions(this.getActionParams(params));
     return this.submitAuctionTx(actions, key);
   }
-  
- async createUser(inpt: NCCreateUser) { return this.accounts.createUser(inpt); }
+
+ 
+ async createKeyPair() { return this.accounts.createKeyPair(); }
+ async createAccount(inpt: NCCreateUser) { return this.accounts.createAccount(inpt); }
  async buyRam(inpt: NCBuyRam) { return this.accounts.buyRam(inpt) }; 
+ async createPermission(inpt: NCCreatePermission) { return this.accounts.createPermission(inpt); }
+ async linkPermission(inpt: NCLinkPerm ) { return this.accounts.linkPermission(inpt); }
 
  async createCollection(inpt: NCCreateCollection) { return this.assets.createCollection(inpt);}
  async mintAsset(inpt: NCMintAsset) { return this.assets.mintAsset(inpt); }
@@ -744,7 +674,6 @@ export class NCO_BlockchainAPI {
  async unstakePool(inpt: NCUnstakePool) { return this.pools.unstakePool(inpt); }
  
  async createDao(inpt: NCCreateDao) { return this.daos.createDao(inpt);}
-
  async createDaoProposal(inpt: NCCreateDaoProposal) { return this.daos.createDaoProposal(inpt); }
  async createDaoUserWhitelistProposal(inpt: NCCreateDaoUserWhitelistProposal) { return this.daos.createDaoUserWhitelistProposal(inpt); }
  async createDaoStakeProposal(inpt: NCCreateDaoStakeProposal) { return this.daos.createDaoStakeProposal(inpt); }
@@ -760,5 +689,11 @@ export class NCO_BlockchainAPI {
  async voteOnProposal(inpt: NCDaoProposalVote) { return this.daos.voteOnProposal(inpt) };
  async withdrawVoteDeposit(inpt: NCDaoWithdrawVoteDeposit) { return this.daos.withdrawVoteDeposit(inpt); }
 
- async submitTx(actions: any[], public_keys: string[], private_keys: string[] ) {   this.submitter.SubmitTx(actions,public_keys, private_keys); }
+ async submitTx(actions: any[], public_keys: string[], private_keys: string[] ) {   return this.submitter.SubmitTx(actions,public_keys, private_keys); }
+
+ async txNCOBalance(inpt: NCTxBal) { return this.txer.txNCOBalance(inpt); }
+ async txGNCOBalance(inpt: NCTxBal) { return this.txer.txGNCOBalance(inpt); }
+ async getAccountBalance(inpt: NCGetAccInfo) {return this.txer.getAccountBalance(inpt); }
+
+
 }

@@ -1,7 +1,7 @@
-import { NCInit, NCInitServices, NCInitUrls } from "./io/system";
+import { NCInit, NCInitServices, NCInitUrls } from "../system";
 
 import { NCCreatePool, NCStakePool, NCUnstakePool,
-        NCStakeMainDao, NCReturnTxs } from "./types";
+        NCStakeMainDao, NCReturnTxs } from "../types";
 
 import { TransactResult } from "eosjs/dist/eosjs-api-interfaces";
 //const ecc = require("eosjs-ecc-priveos");

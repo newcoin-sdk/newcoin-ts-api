@@ -1,45 +1,77 @@
-import { NCInit } from "./io/system";
+import { NCInit } from "./system";
+//import { readAsset, readAssetBySchema } from "./io/nft";
+import { NCO_read_API } from "./L1/reader";
 
-export { NCO_utils_API }
 
-class NCO_utils_API {
+export class NCO_utils_API {
 
-    //@ts-ignore
-    constructor(n: NCInit){};
+    //private aa_url;
+    private reader;
 
-     normalizeUsername = (username: string, r: string) => {
-    return username.replace(/\./g, r + r.repeat(12 - username.length));
-};
+    constructor(n: NCInit){
+        //this.aa_url = n.urls.atomicassets_url;
+        this.reader = new NCO_read_API(n);
+    };
 
-// Collection names 
-     getRootCollectionName = (username: string) => {
-    return this.normalizeUsername(username, "z");
-};
+    normalizeUsername = (username: string, r: string) => {
+        return username.replace(/\./g, r + r.repeat(12 - username.length));
+    };
 
-     getFileCollectionName = (username: string) => {
-    return this.normalizeUsername(username, "y");
-};
+    // Collection names 
+    getRootCollectionName = (username: string) => {
+        return this.normalizeUsername(username, "z");
+    };
 
-// schema names 
-      getRootCollectionNftSchemaName = (username: string) => {
-    return this.normalizeUsername(username, "w");
-};
+    getFileCollectionName = (username: string) => {
+        return this.normalizeUsername(username, "y");
+    };
 
-      getRootCollectionProfileSchemaName = (username: string) => {
-    return this.normalizeUsername(username, "p");
-};
-// links to other collecitons with descriptions
-     getRootCollectionBindingSchemaName = (username: string) => {
-    return this.normalizeUsername(username, "b");
-};
+    // schema names 
+    getRootCollectionNftSchemaName = (username: string) => {
+        return this.normalizeUsername(username, "w");
+    };
 
-      getFileCollectionFileSchemaName = (username: string) => {
-    return this.normalizeUsername(username, "v");
-};
+    getRootCollectionProfileSchemaName = (username: string) => {
+        return this.normalizeUsername(username, "p");
+    };
 
-// template
-      getRootCollectionDefaultSchemaTemplateName = (username: string) => {
-    return this.normalizeUsername(username, "t");
-};
+    // links to other collecitons with descriptions
+    getRootCollectionLinkSchemaName = (username: string) => {
+        return this.normalizeUsername(username, "b");
+    };
+
+    getFileCollectionFileSchemaName = (username: string) => {
+        return this.normalizeUsername(username, "v");
+    };
+
+    // templates
+    /*    getRootCollectionDefaultSchemaTemplateName = (username: string) => {
+        return this.normalizeUsername(username, "t");
+    };*/
+    getLinkSchemaLikeTemplateID = (username: string,  _col?: string, _sch?: string) => {
+        const col = _col??this.getRootCollectionName(username);
+        const sch = _sch??this.getRootCollectionLinkSchemaName(username);
+        return this.reader.getCollectionTemplateID(col, sch ,'like');
+    };
+
+    getLinkSchemaBadgeTemplateID = (username: string, _col?: string, _sch?: string) => {
+        const col = _col??this.getRootCollectionName(username);
+        const sch = _sch??this.getRootCollectionLinkSchemaName(username);
+        return this.reader.getCollectionTemplateID(col, sch ,'badge');
+    };
+    
+    getLinkSchemaFollowTemplateID = (username: string) => {
+        const col = this.getRootCollectionName(username);
+        const sch = this.getRootCollectionLinkSchemaName(username);
+        return this.reader.getCollectionTemplateID(col, sch, 'follow');
+    };
+        
+    getLinkSchemaRepostTemplateID = (username: string) => {
+        return this.normalizeUsername(username, 'p');
+    };
+
+    getLinkSchemaNftMirrorTemplateID = (username: string) => {
+        return this.normalizeUsername(username, 'm');
+    };
 
 }

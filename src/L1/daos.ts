@@ -1,9 +1,10 @@
-import { NCInit, NCInitServices, NCInitUrls } from "./io/system";
+import { NCInit, NCInitServices, NCInitUrls } from "../system";
 
-import { NCCreateDao, NCGetDaoWhiteList, 
+import { 
+    NCCreateDao, NCGetDaoWhiteList, 
     NCCreateDaoProposal, NCCreateDaoUserWhitelistProposal, NCCreateDaoStakeProposal,
     NCApproveDaoProposal, NCExecuteDaoProposal, NCGetVotes, 
-    NCGetDaoProposals, NCDaoProposalVote, NCDaoWithdrawVoteDeposit, NCReturnTxs } from "./types";
+    NCGetDaoProposals, NCDaoProposalVote, NCDaoWithdrawVoteDeposit, NCReturnTxs } from "../types";
 
 import { TransactResult } from "eosjs/dist/eosjs-api-interfaces";
 import { ActionGenerator as DaosAG, ChainApi as DaosChainApi } from  '@newfound8ion/newcoin.daos-js'

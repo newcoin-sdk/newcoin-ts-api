@@ -1,11 +1,11 @@
-import { NCInit, NCInitServices, NCInitUrls } from "./io/system";
-import { NCMintAsset, NCCreateCollection, NCReturnTxs, NCModifyAsset } from "./types";
+import { NCInit, NCInitServices, NCInitUrls } from "../system";
+import { NCMintAsset, NCCreateCollection, NCReturnTxs, NCModifyAsset } from "../types";
 import { TransactResult } from "eosjs/dist/eosjs-api-interfaces";
 import { ActionGenerator as sdkActionGen } from "./actions";
 import { NCO_submit_API } from "./submit"
-import { NCO_utils_API } from "./utils";
-import { default_schema } from "./schemas";
-import { atomicTxToAssetId } from "./io/nft";
+import { NCO_utils_API } from "../utils";
+import { default_nft_schema } from "../schemas";
+import { NCO_read_API } from "./reader";
 
 export { NCO_assets_API }
 
@@ -15,7 +15,8 @@ class NCO_assets_API {
     // @ts-ignore
     private urls     : NCInitUrls; 
     private sdkGen   : sdkActionGen;
-    private submitter: NCO_submit_API; 
+    private submitter: NCO_submit_API;
+    private reader   : NCO_read_API; 
     private utils    : NCO_utils_API;
 
     constructor( inpt: NCInit ) {
@@ -23,6 +24,7 @@ class NCO_assets_API {
         this.services   = inpt.services;
         this.urls       = inpt.urls;
         this.submitter  = new NCO_submit_API(inpt);
+        this.reader     = new NCO_read_API(inpt);
         this.sdkGen     = new sdkActionGen(this.services.eosio_contract, this.services.token_contract);
         this.utils      = new NCO_utils_API(inpt);
         this.urls       = inpt.urls;
@@ -73,7 +75,7 @@ class NCO_assets_API {
         
             // Schemas --- 
             if(this.debug) console.log("creating schema ");
-            let schema_fields = inpt.schema_fields ? inpt.schema_fields : default_schema;
+            let schema_fields = inpt.schema_fields ? inpt.schema_fields : default_nft_schema;
             let t1 = this.sdkGen.createSchema(inpt.user, inpt.collection_name, inpt.schema_name, schema_fields);
             if(this.debug) console.log(t1);
             
@@ -107,7 +109,7 @@ class NCO_assets_API {
 
         let r: NCReturnTxs = {};
         if (inpt.col_name == undefined) inpt.col_name = this.utils.getRootCollectionName(inpt.creator);
-        if (inpt.sch_name == undefined) inpt.sch_name = this.utils.getRootCollectionBindingSchemaName(inpt.creator);    
+        if (inpt.sch_name == undefined) inpt.sch_name = this.utils.getRootCollectionLinkSchemaName(inpt.creator);    
         if (inpt.tmpl_id == undefined) inpt.tmpl_id = -1;
         if ( (inpt.immutable_data == undefined) && (inpt.mutable_data == undefined) ) return r; // nothing to mint
         if (inpt.immutable_data == undefined) inpt.immutable_data = [{ key: 'name', value: ['string', inpt.creator + '_' + (new Date()).getTime()] }];
@@ -123,7 +125,7 @@ class NCO_assets_API {
         r.asset_id = "asset default ID";
   
         try {
-          r.asset_id = (await atomicTxToAssetId(res.transaction_id))[0];
+          r.asset_id = (await this.reader.txToAssetId(res.transaction_id))[0];
         } catch (ex) {
           // asset may not be ready. polling is one solution to wait but if implemented must be optional
           console.log((ex as any).message);

@@ -1,5 +1,5 @@
 
-import { NCInit, NCInitServices, NCInitUrls } from "./io/system";
+import { NCInit, NCInitServices, NCInitUrls } from "../system";
 
 import { Api, JsonRpc } from "eosjs";
 import { Transaction  } from "eosjs/dist/eosjs-api-interfaces";

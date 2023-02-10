@@ -1,10 +1,10 @@
-![Newcoin](https://github.com/newfound8ion/newcoin-sdk/blob/main/docs/media/newcoin-globe.png?raw=true)
 
 # newcoin-sdk
 
+![Newcoin](https://github.com/newfound8ion/newcoin-sdk/blob/main/docs/media/newcoin-globe.png?raw=true)
 This is the newcoin sdk, a starting point for a tooling environment that will make it easy to build applications on top of [https://newcoin.org](newcoin.org).
 
-```
+``` typescript
 npm install --save @newfound8ion/newcoin-sdk
 ```
 
@@ -14,15 +14,16 @@ See [https://docs.newcoin.org/](https://docs.newcoin.org/) for an overview of th
 
 Clone the repo. An npm package will be provided soon
 
-
 See the tests for more examples.
 
-## API Documentation 
+## API Documentation
+
 See [here](./docs/modules.md)
 
-
 ## Usage
-```
+
+``` typescript
+
 function async createUser() {
             const nco_struct : NCCreateUser = {
                 newUser: name, 
@@ -42,11 +43,12 @@ function async createUser() {
 See the tests for more examples.
 
 ## Contributing
-Pull requests are welcome. 
+
+Pull requests are welcome.
 For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)
-# newcoin-sdk

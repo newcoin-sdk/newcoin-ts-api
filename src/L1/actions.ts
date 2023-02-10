@@ -1,5 +1,5 @@
 // @ts-ignore
-import { NCKeyValPair, NCNameType } from "./types"; 
+import { NCKeyValPair, NCNameType } from "../types"; 
 export type EosioAuthorizationObject = { actor: string; permission: string };
 
 export type EosioActionObject = {
@@ -140,7 +140,24 @@ export class ActionGenerator {
       }
       return action;
     }
-    
+  /*
+    async addcolauth(authorization: EosioAuthorizationObject[], collection_name: string, account_to_add: string): Promise<EosioActionObject[]> {
+      return this._pack(authorization, 'addcolauth', {collection_name, account_to_add});
+  }
+
+    async addnotifyacc(authorization: EosioAuthorizationObject[], collection_name: string, account_to_add: string): Promise<EosioActionObject[]> {
+      return this._pack(authorization, 'addnotifyacc', {collection_name, account_to_add});
+  }
+
+    async remcolauth(authorization: EosioAuthorizationObject[], collection_name: string, account_to_remove: string): Promise<EosioActionObject[]> {
+      return this._pack(authorization, 'remcolauth', {collection_name, account_to_remove});
+  }
+
+    async remnotifyacc(authorization: EosioAuthorizationObject[], collection_name: string, account_to_remove: string): Promise<EosioActionObject[]> {
+      return this._pack(authorization, 'remnotifyacc', {collection_name, account_to_remove});
+  }
+
+  */
     createSchema = (
       author: string,
       collection_name: string,
