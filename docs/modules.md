@@ -15,6 +15,8 @@
 ### Type Aliases
 
 - [NCApproveDaoProposal](modules.md#ncapprovedaoproposal)
+- [NCBuyRam](modules.md#ncbuyram)
+- [NCChangeFile](modules.md#ncchangefile)
 - [NCCreateCollection](modules.md#nccreatecollection)
 - [NCCreateDao](modules.md#nccreatedao)
 - [NCCreateDaoProposal](modules.md#nccreatedaoproposal)
@@ -24,17 +26,21 @@
 - [NCCreatePool](modules.md#nccreatepool)
 - [NCCreateUser](modules.md#nccreateuser)
 - [NCDaoProposalVote](modules.md#ncdaoproposalvote)
+- [NCDaoWithdrawVoteDeposit](modules.md#ncdaowithdrawvotedeposit)
 - [NCExecuteDaoProposal](modules.md#ncexecutedaoproposal)
 - [NCGetAccInfo](modules.md#ncgetaccinfo)
 - [NCGetDaoProposals](modules.md#ncgetdaoproposals)
 - [NCGetDaoWhiteList](modules.md#ncgetdaowhitelist)
 - [NCGetPoolInfo](modules.md#ncgetpoolinfo)
 - [NCGetVotes](modules.md#ncgetvotes)
-- [NCInitServices](modules.md#ncinitservices)
-- [NCInitUrls](modules.md#nciniturls)
 - [NCKeyPair](modules.md#nckeypair)
+- [NCKeyValPair](modules.md#nckeyvalpair)
 - [NCLinkPerm](modules.md#nclinkperm)
 - [NCMintAsset](modules.md#ncmintasset)
+- [NCMintFile](modules.md#ncmintfile)
+- [NCMintLink](modules.md#ncmintlink)
+- [NCMintProfile](modules.md#ncmintprofile)
+- [NCModifyAsset](modules.md#ncmodifyasset)
 - [NCNameType](modules.md#ncnametype)
 - [NCPoolsInfo](modules.md#ncpoolsinfo)
 - [NCReturnInfo](modules.md#ncreturninfo)
@@ -47,9 +53,12 @@
 
 ### Variables
 
-- [default\_schema](modules.md#default_schema)
+- [default\_nft\_schema](modules.md#default_nft_schema)
 - [devnet\_services](modules.md#devnet_services)
 - [devnet\_urls](modules.md#devnet_urls)
+- [file\_schema](modules.md#file_schema)
+- [link\_schema](modules.md#link_schema)
+- [profile\_schema](modules.md#profile_schema)
 
 ## Type Aliases
 
@@ -70,7 +79,50 @@
 
 #### Defined in
 
-[types.ts:167](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L167)
+[types.ts:185](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L185)
+
+___
+
+### NCBuyRam
+
+Ƭ **NCBuyRam**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `payer` | `string` |
+| `payer_prv_key` | `string` |
+| `ram_amt` | `number` |
+| `user` | `string` |
+
+#### Defined in
+
+[types.ts:16](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L16)
+
+___
+
+### NCChangeFile
+
+Ƭ **NCChangeFile**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `asset_id` | `string` |
+| `editor` | `string` |
+| `new_content?` | `string` |
+| `new_image?` | `string` |
+| `new_name?` | `string` |
+| `new_path?` | `string` |
+| `owner` | `string` |
+| `payer?` | `string` |
+| `payer_prv_key` | `string` |
+
+#### Defined in
+
+[types.ts:380](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L380)
 
 ___
 
@@ -97,7 +149,7 @@ ___
 
 #### Defined in
 
-[types.ts:31](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L31)
+[types.ts:35](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L35)
 
 ___
 
@@ -116,7 +168,7 @@ ___
 
 #### Defined in
 
-[types.ts:127](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L127)
+[types.ts:138](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L138)
 
 ___
 
@@ -130,6 +182,7 @@ ___
 | :------ | :------ |
 | `dao_id?` | `string` |
 | `dao_owner` | `string` |
+| `pass_rate` | `number` |
 | `proposer` | `string` |
 | `proposer_prv_key` | `string` |
 | `summary` | `string` |
@@ -140,7 +193,7 @@ ___
 
 #### Defined in
 
-[types.ts:134](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L134)
+[types.ts:145](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L145)
 
 ___
 
@@ -154,16 +207,19 @@ ___
 | :------ | :------ |
 | `dao_id?` | `string` |
 | `dao_owner` | `string` |
+| `pass_rate` | `number` |
 | `proposer` | `string` |
 | `proposer_prv_key` | `string` |
-| `quantity` | `string` |
+| `quantity` | { `contract`: `string` ; `quantity`: `string`  } |
+| `quantity.contract` | `string` |
+| `quantity.quantity` | `string` |
 | `to` | `string` |
 | `vote_end` | `string` |
 | `vote_start` | `string` |
 
 #### Defined in
 
-[types.ts:156](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L156)
+[types.ts:170](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L170)
 
 ___
 
@@ -177,15 +233,17 @@ ___
 | :------ | :------ |
 | `dao_id?` | `string` |
 | `dao_owner` | `string` |
+| `pass_rate` | `number` |
 | `proposer` | `string` |
 | `proposer_prv_key` | `string` |
+| `type` | `string` |
 | `user` | `string` |
 | `vote_end` | `string` |
 | `vote_start` | `string` |
 
 #### Defined in
 
-[types.ts:146](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L146)
+[types.ts:158](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L158)
 
 ___
 
@@ -204,7 +262,7 @@ ___
 
 #### Defined in
 
-[types.ts:46](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L46)
+[types.ts:50](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L50)
 
 ___
 
@@ -225,7 +283,7 @@ ___
 
 #### Defined in
 
-[types.ts:61](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L61)
+[types.ts:65](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L65)
 
 ___
 
@@ -249,7 +307,7 @@ ___
 
 #### Defined in
 
-[types.ts:19](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L19)
+[types.ts:23](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L23)
 
 ___
 
@@ -272,7 +330,25 @@ ___
 
 #### Defined in
 
-[types.ts:197](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L197)
+[types.ts:217](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L217)
+
+___
+
+### NCDaoWithdrawVoteDeposit
+
+Ƭ **NCDaoWithdrawVoteDeposit**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `vote_id` | `string` |
+| `voter` | `string` |
+| `voter_prv_key` | `string` |
+
+#### Defined in
+
+[types.ts:228](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L228)
 
 ___
 
@@ -293,7 +369,7 @@ ___
 
 #### Defined in
 
-[types.ts:176](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L176)
+[types.ts:194](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L194)
 
 ___
 
@@ -311,7 +387,7 @@ ___
 
 #### Defined in
 
-[types.ts:247](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L247)
+[types.ts:392](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L392)
 
 ___
 
@@ -334,7 +410,7 @@ ___
 
 #### Defined in
 
-[types.ts:186](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L186)
+[types.ts:204](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L204)
 
 ___
 
@@ -355,7 +431,7 @@ ___
 
 #### Defined in
 
-[types.ts:222](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L222)
+[types.ts:242](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L242)
 
 ___
 
@@ -372,7 +448,7 @@ ___
 
 #### Defined in
 
-[types.ts:253](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L253)
+[types.ts:398](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L398)
 
 ___
 
@@ -392,47 +468,7 @@ ___
 
 #### Defined in
 
-[types.ts:214](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L214)
-
-___
-
-### NCInitServices
-
-Ƭ **NCInitServices**: `Object`
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `atomicassets_contract` | `string` |
-| `daos_contract` | `string` |
-| `eosio_contract` | `string` |
-| `maindao_contract` | `string` |
-| `neftymarket_contract` | `string` |
-| `staking_contract` | `string` |
-| `token_contract` | `string` |
-
-#### Defined in
-
-[index.ts:67](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/index.ts#L67)
-
-___
-
-### NCInitUrls
-
-Ƭ **NCInitUrls**: `Object`
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `atomicassets_url` | `string` |
-| `hyperion_url` | `string` |
-| `nodeos_url` | `string` |
-
-#### Defined in
-
-[index.ts:61](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/index.ts#L61)
+[types.ts:234](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L234)
 
 ___
 
@@ -449,7 +485,24 @@ ___
 
 #### Defined in
 
-[types.ts:2](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L2)
+[types.ts:6](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L6)
+
+___
+
+### NCKeyValPair
+
+Ƭ **NCKeyValPair**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `key` | `string` |
+| `value` | `string`[] |
+
+#### Defined in
+
+[types.ts:251](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L251)
 
 ___
 
@@ -469,7 +522,7 @@ ___
 
 #### Defined in
 
-[types.ts:53](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L53)
+[types.ts:57](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L57)
 
 ___
 
@@ -483,16 +536,140 @@ ___
 | :------ | :------ |
 | `col_name?` | `string` |
 | `creator` | `string` |
-| `immutable_data` | [`NCKeyValPair`](modules/internal_.md#nckeyvalpair)[] |
-| `mutable_data` | [`NCKeyValPair`](modules/internal_.md#nckeyvalpair)[] |
-| `payer` | `string` |
-| `payer_prv_key` | `string` |
+| `immutable_data` | [`NCKeyValPair`](modules.md#nckeyvalpair)[] |
+| `mutable_data` | [`NCKeyValPair`](modules.md#nckeyvalpair)[] |
+| `payer?` | `string` |
+| `payer_prv_key?` | `string` |
 | `sch_name?` | `string` |
 | `tmpl_id?` | `number` |
+| `user_prv_active_key?` | `string` |
 
 #### Defined in
 
-[types.ts:236](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L236)
+[types.ts:256](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L256)
+
+___
+
+### NCMintFile
+
+Ƭ **NCMintFile**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `content` | `string` |
+| `creator` | `string` |
+| `image` | `string` |
+| `name` | `string` |
+| `path` | `string` |
+| `payer` | `string` |
+| `payer_prv_key` | `string` |
+| `user_prv_active_key` | `string` |
+
+#### Defined in
+
+[types.ts:369](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L369)
+
+___
+
+### NCMintLink
+
+Ƭ **NCMintLink**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `col_name` | `string` |
+| `creator` | `string` |
+| `description?` | `string` |
+| `image?` | `string` |
+| `payer` | `string` |
+| `payer_prv_key` | `string` |
+| `subj_name` | `string` |
+| `subj_type` | `string` |
+
+#### Defined in
+
+[types.ts:285](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L285)
+
+___
+
+### NCMintProfile
+
+Ƭ **NCMintProfile**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `apple` | `string` |
+| `aspectRatio` | `string` |
+| `authority` | `string` |
+| `bio` | `string` |
+| `blurHash` | `string` |
+| `content` | `string` |
+| `contentType` | `string` |
+| `contentUrl` | `string` |
+| `coverContentUrl` | `string` |
+| `creator` | `string` |
+| `discord` | `string` |
+| `displayName` | `string` |
+| `email` | `string` |
+| `facebook` | `string` |
+| `facebookId` | `string` |
+| `firstName` | `string` |
+| `fullName` | `string` |
+| `instagram` | `string` |
+| `lastName` | `string` |
+| `medium` | `string` |
+| `offer` | `string` |
+| `payer` | `string` |
+| `payer_prv_key` | `string` |
+| `phone` | `string` |
+| `pinterest` | `string` |
+| `reddit` | `string` |
+| `signal` | `string` |
+| `signature` | `string` |
+| `snapchat` | `string` |
+| `soundcloud` | `string` |
+| `source` | `string` |
+| `spotify` | `string` |
+| `status` | `string` |
+| `telegram` | `string` |
+| `tiktok` | `string` |
+| `tumblr` | `string` |
+| `twitter` | `string` |
+| `user_prv_active_key` | `string` |
+| `username` | `string` |
+| `youtube` | `string` |
+| `youtubeId` | `string` |
+
+#### Defined in
+
+[types.ts:318](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L318)
+
+___
+
+### NCModifyAsset
+
+Ƭ **NCModifyAsset**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `asset_id` | `string` |
+| `editor` | `string` |
+| `new_data` | [`NCKeyValPair`](modules.md#nckeyvalpair)[] |
+| `owner` | `string` |
+| `payer` | `string` |
+| `payer_prv_key` | `string` |
+
+#### Defined in
+
+[types.ts:268](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L268)
 
 ___
 
@@ -509,7 +686,7 @@ ___
 
 #### Defined in
 
-[types.ts:7](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L7)
+[types.ts:11](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L11)
 
 ___
 
@@ -527,7 +704,7 @@ ___
 
 #### Defined in
 
-[types.ts:120](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L120)
+[types.ts:124](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L124)
 
 ___
 
@@ -543,7 +720,7 @@ ___
 
 #### Defined in
 
-[types.ts:290](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L290)
+[types.ts:442](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L442)
 
 ___
 
@@ -559,6 +736,7 @@ ___
 | `TxID_WithdrawVoteDeposit?` | `string` |
 | `TxID_addToWhiteList?` | `string` |
 | `TxID_approveDaoProposal?` | `string` |
+| `TxID_changeFile?` | `string` |
 | `TxID_createAcc?` | `string` |
 | `TxID_createCol?` | `string` |
 | `TxID_createDao?` | `string` |
@@ -570,6 +748,10 @@ ___
 | `TxID_executeDaoProposal?` | `string` |
 | `TxID_linkPerm?` | `string` |
 | `TxID_mintAsset?` | `string` |
+| `TxID_mintFile?` | `string` |
+| `TxID_mintNft?` | `string` |
+| `TxID_mintProfile?` | `string` |
+| `TxID_modifyAsset?` | `string` |
 | `TxID_removeFromWhiteList?` | `string` |
 | `TxID_stakeMainDAO?` | `string` |
 | `TxID_stakePool?` | `string` |
@@ -578,14 +760,17 @@ ___
 | `TxID_unstakePool?` | `string` |
 | `TxID_voteDaoProposal?` | `string` |
 | `TxID_withdrawFromPool?` | `string` |
+| `asset_id?` | `string` |
 | `dao_id?` | `string` |
 | `pool_code?` | `string` |
 | `pool_id?` | `string` |
 | `proposal_id?` | `number` |
+| `template_id?` | `string` |
+| `tx?` | `TransactResult` |
 
 #### Defined in
 
-[types.ts:258](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L258)
+[types.ts:403](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L403)
 
 ___
 
@@ -603,7 +788,7 @@ ___
 
 #### Defined in
 
-[types.ts:70](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L70)
+[types.ts:74](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L74)
 
 ___
 
@@ -622,7 +807,7 @@ ___
 
 #### Defined in
 
-[types.ts:76](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L76)
+[types.ts:80](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L80)
 
 ___
 
@@ -642,7 +827,7 @@ ___
 
 #### Defined in
 
-[types.ts:98](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L98)
+[types.ts:102](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L102)
 
 ___
 
@@ -662,7 +847,7 @@ ___
 
 #### Defined in
 
-[types.ts:90](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L90)
+[types.ts:94](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L94)
 
 ___
 
@@ -680,34 +865,64 @@ ___
 
 #### Defined in
 
-[types.ts:83](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L83)
+[types.ts:87](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L87)
 
 ## Variables
 
-### default\_schema
+### default\_nft\_schema
 
-• `Const` **default\_schema**: { `name`: `string` = 'name'; `type`: `string` = "string" }[]
+• `Const` **default\_nft\_schema**: { `name`: `string` = 'name'; `type`: `string` = "string" }[]
 
 #### Defined in
 
-[types.ts:294](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/types.ts#L294)
+[schemas.ts:9](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/schemas.ts#L9)
 
 ___
 
 ### devnet\_services
 
-• `Const` **devnet\_services**: [`NCInitServices`](modules.md#ncinitservices)
+• `Const` **devnet\_services**: [`NCInitServices`](modules/internal_.md#ncinitservices)
 
 #### Defined in
 
-[index.ts:84](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/index.ts#L84)
+[system.ts:43](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/system.ts#L43)
 
 ___
 
 ### devnet\_urls
 
-• `Const` **devnet\_urls**: [`NCInitUrls`](modules.md#nciniturls)
+• `Const` **devnet\_urls**: [`NCInitUrls`](modules/internal_.md#nciniturls)
 
 #### Defined in
 
-[index.ts:77](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/index.ts#L77)
+[system.ts:26](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/system.ts#L26)
+
+___
+
+### file\_schema
+
+• `Const` **file\_schema**: { `name`: `string` = 'name'; `type`: `string` = 'string' }[]
+
+#### Defined in
+
+[schemas.ts:19](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/schemas.ts#L19)
+
+___
+
+### link\_schema
+
+• `Const` **link\_schema**: { `name`: `string` = 'name'; `type`: `string` = 'string' }[]
+
+#### Defined in
+
+[schemas.ts:91](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/schemas.ts#L91)
+
+___
+
+### profile\_schema
+
+• `Const` **profile\_schema**: { `name`: `string` = "name"; `type`: `string` = "string" }[]
+
+#### Defined in
+
+[schemas.ts:38](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/schemas.ts#L38)

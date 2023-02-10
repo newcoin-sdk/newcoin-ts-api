@@ -25,6 +25,7 @@
 - [createTemplate](internal_.ActionGenerator.md#createtemplate)
 - [delegateBw](internal_.ActionGenerator.md#delegatebw)
 - [mintAsset](internal_.ActionGenerator.md#mintasset)
+- [modifyAsset](internal_.ActionGenerator.md#modifyasset)
 - [newaccount](internal_.ActionGenerator.md#newaccount)
 - [txBalance](internal_.ActionGenerator.md#txbalance)
 - [txNcoBalance](internal_.ActionGenerator.md#txncobalance)
@@ -44,7 +45,7 @@
 
 #### Defined in
 
-[actions.ts:12](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/actions.ts#L12)
+[L1/actions.ts:13](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/actions.ts#L13)
 
 ## Properties
 
@@ -54,7 +55,7 @@
 
 #### Defined in
 
-[actions.ts:12](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/actions.ts#L12)
+[L1/actions.ts:13](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/actions.ts#L13)
 
 ___
 
@@ -64,7 +65,7 @@ ___
 
 #### Defined in
 
-[actions.ts:12](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/actions.ts#L12)
+[L1/actions.ts:13](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/actions.ts#L13)
 
 ## Methods
 
@@ -96,7 +97,7 @@ ___
 
 #### Defined in
 
-[actions.ts:51](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/actions.ts#L51)
+[L1/actions.ts:52](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/actions.ts#L52)
 
 ___
 
@@ -121,7 +122,7 @@ ___
 
 #### Defined in
 
-[actions.ts:116](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/actions.ts#L116)
+[L1/actions.ts:117](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/actions.ts#L117)
 
 ___
 
@@ -158,7 +159,7 @@ ___
 
 #### Defined in
 
-[actions.ts:192](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/actions.ts#L192)
+[L1/actions.ts:210](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/actions.ts#L210)
 
 ___
 
@@ -196,7 +197,7 @@ ___
 
 #### Defined in
 
-[actions.ts:253](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/actions.ts#L253)
+[L1/actions.ts:295](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/actions.ts#L295)
 
 ___
 
@@ -219,7 +220,7 @@ ___
 
 #### Defined in
 
-[actions.ts:143](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/actions.ts#L143)
+[L1/actions.ts:161](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/actions.ts#L161)
 
 ___
 
@@ -244,7 +245,7 @@ ___
 
 #### Defined in
 
-[actions.ts:165](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/actions.ts#L165)
+[L1/actions.ts:183](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/actions.ts#L183)
 
 ___
 
@@ -280,24 +281,25 @@ ___
 
 #### Defined in
 
-[actions.ts:66](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/actions.ts#L66)
+[L1/actions.ts:67](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/actions.ts#L67)
 
 ___
 
 ### mintAsset
 
-▸ **mintAsset**(`author`, `col_name`, `sch_name`, `tmpl_id`, `immutable_data`, `mutable_data`): `any`
+▸ **mintAsset**(`owner`, `col_name`, `sch_name`, `tmpl_id`, `immutable_data`, `mutable_data`, `author?`): `any`
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `author` | `string` |
+| `owner` | `string` |
 | `col_name` | `string` |
 | `sch_name` | `string` |
 | `tmpl_id` | `number` |
 | `immutable_data` | `any`[] |
 | `mutable_data` | `any`[] |
+| `author?` | `string` |
 
 #### Returns
 
@@ -305,7 +307,30 @@ ___
 
 #### Defined in
 
-[actions.ts:225](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/actions.ts#L225)
+[L1/actions.ts:243](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/actions.ts#L243)
+
+___
+
+### modifyAsset
+
+▸ **modifyAsset**(`editor`, `owner`, `asset_id`, `new_mutable_data`): `any`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `editor` | `string` |
+| `owner` | `string` |
+| `asset_id` | `string` |
+| `new_mutable_data` | `any`[] |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[L1/actions.ts:273](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/actions.ts#L273)
 
 ___
 
@@ -347,7 +372,7 @@ ___
 
 #### Defined in
 
-[actions.ts:14](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/actions.ts#L14)
+[L1/actions.ts:15](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/actions.ts#L15)
 
 ___
 
@@ -382,7 +407,7 @@ ___
 
 #### Defined in
 
-[actions.ts:302](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/actions.ts#L302)
+[L1/actions.ts:344](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/actions.ts#L344)
 
 ___
 
@@ -416,4 +441,4 @@ ___
 
 #### Defined in
 
-[actions.ts:281](https://github.com/Newcoin-Foundation/newcoin-sdk/blob/0336391/src/actions.ts#L281)
+[L1/actions.ts:323](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/actions.ts#L323)

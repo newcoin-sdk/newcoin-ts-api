@@ -196,7 +196,7 @@ const api = new NCO_BlockchainAPI(
 
     });
 
-    describe.skip("Permission management", () => {
+    describe("Permission management", () => {
         it("create permission", async () => {
             let n: NCCreatePermission = { 
                 author: name, 
@@ -226,7 +226,7 @@ const api = new NCO_BlockchainAPI(
         }, 60000);
     });
 
-    describe.skip("tx NCO transactions", () => {
+    describe("tx NCO transactions", () => {
         it("tx nco balance", async () => {
             console.log("transefrring some NCO to resp");
             let n: NCTxNcoBal = { 
@@ -266,7 +266,7 @@ const api = new NCO_BlockchainAPI(
         }, 60000)
     });
 
-    describe.skip("pools tests", () => {
+    describe("pools tests", () => {
 
         it("create pool", async () => {
 
@@ -383,7 +383,7 @@ const api = new NCO_BlockchainAPI(
                 }, 60000);
     });
     
-    describe.skip("'DAO tests", () => {
+    describe("'DAO tests", () => {
         it("create dao", async () => {
 
             let n: NCCreateDao = { 
@@ -796,7 +796,7 @@ const api = new NCO_BlockchainAPI(
 
     });
 
-    describe.skip("Votes tests", () => {
+    describe("Votes tests", () => {
         it("get dao whitelist", async () => {
 
             let n: NCGetDaoWhiteList = { 
@@ -1070,7 +1070,7 @@ const api = new NCO_BlockchainAPI(
         }, 60000);
     });
 
-    describe.skip ("get account pools balances", () => {
+    describe ("get account pools balances", () => {
         it("get pool balances", async () => {
             
             let n:   NCGetAccInfo = { owner: 'io', contract: 'pools2.nco' } ;
@@ -1089,7 +1089,7 @@ const api = new NCO_BlockchainAPI(
         }, 60000)
     });
 
-    describe.skip("bare account (BA) operations", () => {
+    describe("bare account (BA) operations", () => {
 
         it("BA create acc", async () => {
 
