@@ -1,18 +1,17 @@
 {
-  "name": "@newfound8ion/newcoin-sdk",
-  "version": "1.4.0",
-  "description": "SDK for Newcoin blockchain",
+  "name": "nwecoin-ts-api",
+  "version": "0.9.0",
+  "description": "Typescript API wrapper for Newcoin blockchain",
   "main": "./dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "./dist/index.d.ts",
-  
   "scripts": {
     "test": "npm run build && jest --bail",
     "docs": "typedoc --out docs src/index.ts --excludeExternals --excludePrivate --excludeProtected --emit docs",
     "build": "npm run dist",
     "dist": "rollup -c --bundleConfigAsCjs"
   },
-  "author": "vitalyrue",
+  "author": "yannafaith",
   "license": "MIT",
   "dependencies": {
     "@eoscafe/hyperion": "^3.2.9",
@@ -49,21 +48,6 @@
   "keywords": [
     "newcoin"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/newfound8ion/newcoin-sdk.git"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org"
-  },
-  "bugs": {
-    "url": "https://github.com/newfound8ion/newcoin-sdk/issues"
-  },
-  "homepage": "https://github.com/newfound8ion/newcoin-sdk#readme",
-  "directories": {
-    "doc": "docs",
-    "test": "test"
-  },
   "browser": {
     "buffer": false
   }
