@@ -1,5 +1,5 @@
 {
-  "name": "nwecoin-ts-api",
+  "name": "newcoin-ts-api",
   "version": "0.9.0",
   "description": "Typescript API wrapper for Newcoin blockchain",
   "main": "./dist/index.cjs",

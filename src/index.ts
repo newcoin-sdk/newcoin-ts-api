@@ -306,7 +306,7 @@ async mintBadge(inpt: NCMintBadge ) {
 }
 
   // @ts-ignore
-  static private const STATUS_LIST = {
+  STATUS_LIST = {
     semantic: "semantic",
     imported: "imported",
     invited: "invited",
@@ -677,6 +677,7 @@ async mintBadge(inpt: NCMintBadge ) {
  async createDaoProposal(inpt: NCCreateDaoProposal) { return this.daos.createDaoProposal(inpt); }
  async createDaoUserWhitelistProposal(inpt: NCCreateDaoUserWhitelistProposal) { return this.daos.createDaoUserWhitelistProposal(inpt); }
  async createDaoStakeProposal(inpt: NCCreateDaoStakeProposal) { return this.daos.createDaoStakeProposal(inpt); }
+ async createDaoRemoveMemberProposal(inpt: NCCreateDaoStakeProposal) { return this.daos.removeMemberProposal(inpt); }
 
  async approveDaoProposal(inpt: NCApproveDaoProposal) { return this.daos.approveDaoProposal(inpt); }
  async approveDaoWhitelistProposal(inpt: NCApproveDaoProposal) { return this.daos.approveDaoWhitelistProposal(inpt); }

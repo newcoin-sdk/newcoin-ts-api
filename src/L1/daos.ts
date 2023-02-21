@@ -70,7 +70,6 @@ class NCO_daos_API {
         let r: NCReturnTxs = {};
         r.TxID_createDao = res.transaction_id;
         r.dao_id = w.rows[0].id.toString();
-        // r.dao_id = r.dao_id.toString() ;
         return r;
     }
     
@@ -350,8 +349,11 @@ class NCO_daos_API {
         //if(this.debug) console.log("received from withdraw: " + JSON.stringify(res));
         return { TxID_WithdrawVoteDeposit: res.transaction_id } as NCReturnTxs;
     }
+    
+    
+    
 
-// @ts-ignore
+    // @ts-ignore
     async removeMemberProposal (inpt) {
         const dao_id = inpt.dao_id || (await this.getDaoIdByOwner(inpt.dao_owner));
         

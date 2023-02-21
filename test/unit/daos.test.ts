@@ -9,8 +9,6 @@ const api = new NCO_BlockchainAPI({
 	}
 );
 
-// const name = "dx.io" ;
-
 it("creates dao", async () => {}, 60000);
 
 it("creates standard dao proposal", async () => {
