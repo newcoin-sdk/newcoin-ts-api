@@ -52,6 +52,7 @@ it("creates whitelist remove proposal", async () => {
 	console.log(resp);
 }, 60000);
 
+
 it("approves dao proposal", async () => {
 	let resp = await api.daos.approveDaoProposal({
 		dao_owner: "dx.io",
