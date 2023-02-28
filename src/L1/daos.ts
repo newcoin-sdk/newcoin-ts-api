@@ -129,6 +129,7 @@ class NCO_daos_API {
         r.proposal_id = ps.rows[ps.rows.length - 1].id;
         return r;
     }
+
     
     /**
      *
@@ -379,7 +380,66 @@ class NCO_daos_API {
     }
     // daos end
     
-    
+      /**
+     * @param input 
+     * 
+     */
+      async approveRemoveMemberProposal(inpt: NCApproveDaoProposal) {
+        
+        try {
+            const dao_id = inpt.dao_id || (await this.getDaoIdByOwner(inpt.dao_owner));
+
+            console.log(`dao_owmer: ${inpt.dao_owner}, dao_id: ${dao_id}`);
+
+            if (inpt.proposal_id == undefined) throw ("Proposal ID undefined");
+
+            console.log("Got dao_id: ", dao_id, " number: ", Number(dao_id));
+
+            const t = await this.aGen.approveProposal(
+                [{actor: inpt.approver, permission: "active"}],
+                inpt.approver,
+                Number(dao_id), inpt.proposal_id
+            );
+
+            console.log("Got action: ", JSON.stringify(t));
+
+            const res = await this.SubmitTx(t, 
+                [ecc.privateToPublic(inpt.approver_prv_key)],
+                [inpt.approver_prv_key]) as TransactResult;
+            
+                let r: NCReturnTxs = {};
+                r.TxID_approveDaoProposal = res.transaction_id;
+
+                return r;
+
+        } catch(e) {
+            console.log((e as any).message);
+            console.log(JSON.stringify(e));
+
+            throw e;
+        }
+    }
+
+    async executeRemoveMemberProposal(inpt: NCExecuteDaoProposal) {
+        
+        const dao_id = inpt.dao_id || (await this.getDaoIdByOwner(inpt.dao_owner));
+
+        if (inpt.proposal_id == undefined) throw ("Proposal ID undefined");
+
+        const t = await this.aGen.executeRemoveWhiteListProposal(
+            [{actor: inpt.exec, permission: "active"}],
+            Number(dao_id),
+            inpt.proposal_id
+        );
+
+        const res = await this.SubmitTx(t, [], [inpt.exec_prv_key]) as TransactResult;
+
+        let r: NCReturnTxs = {};
+
+        r.TxID_executeDaoProposal = res.transaction_id;
+
+        return r;
+    }
     
     /**
      * @param inpt : getDaoIdByOwner
