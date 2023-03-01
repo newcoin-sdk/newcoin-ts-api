@@ -20,7 +20,7 @@
 
 #### Defined in
 
-[neftymarket/types/actions.ts:74](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/neftymarket/types/actions.ts#L74)
+[neftymarket/types/actions.ts:74](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/neftymarket/types/actions.ts#L74)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[neftymarket/types/actions.ts:76](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/neftymarket/types/actions.ts#L76)
+[neftymarket/types/actions.ts:76](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/neftymarket/types/actions.ts#L76)
 
 ___
 
@@ -40,4 +40,4 @@ ___
 
 #### Defined in
 
-[neftymarket/types/actions.ts:75](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/neftymarket/types/actions.ts#L75)
+[neftymarket/types/actions.ts:75](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/neftymarket/types/actions.ts#L75)

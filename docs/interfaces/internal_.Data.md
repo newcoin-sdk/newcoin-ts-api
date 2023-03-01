@@ -28,7 +28,7 @@
 
 #### Defined in
 
-[aassets/atomicTypes.ts:20](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/aassets/atomicTypes.ts#L20)
+[aassets/atomicTypes.ts:20](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/aassets/atomicTypes.ts#L20)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 #### Defined in
 
-[aassets/atomicTypes.ts:12](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/aassets/atomicTypes.ts#L12)
+[aassets/atomicTypes.ts:12](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/aassets/atomicTypes.ts#L12)
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 #### Defined in
 
-[aassets/atomicTypes.ts:21](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/aassets/atomicTypes.ts#L21)
+[aassets/atomicTypes.ts:21](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/aassets/atomicTypes.ts#L21)
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 #### Defined in
 
-[aassets/atomicTypes.ts:13](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/aassets/atomicTypes.ts#L13)
+[aassets/atomicTypes.ts:13](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/aassets/atomicTypes.ts#L13)
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 #### Defined in
 
-[aassets/atomicTypes.ts:17](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/aassets/atomicTypes.ts#L17)
+[aassets/atomicTypes.ts:17](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/aassets/atomicTypes.ts#L17)
 
 ___
 
@@ -78,7 +78,7 @@ ___
 
 #### Defined in
 
-[aassets/atomicTypes.ts:22](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/aassets/atomicTypes.ts#L22)
+[aassets/atomicTypes.ts:22](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/aassets/atomicTypes.ts#L22)
 
 ___
 
@@ -88,7 +88,7 @@ ___
 
 #### Defined in
 
-[aassets/atomicTypes.ts:18](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/aassets/atomicTypes.ts#L18)
+[aassets/atomicTypes.ts:18](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/aassets/atomicTypes.ts#L18)
 
 ___
 
@@ -98,7 +98,7 @@ ___
 
 #### Defined in
 
-[aassets/atomicTypes.ts:16](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/aassets/atomicTypes.ts#L16)
+[aassets/atomicTypes.ts:16](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/aassets/atomicTypes.ts#L16)
 
 ___
 
@@ -108,7 +108,7 @@ ___
 
 #### Defined in
 
-[aassets/atomicTypes.ts:14](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/aassets/atomicTypes.ts#L14)
+[aassets/atomicTypes.ts:14](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/aassets/atomicTypes.ts#L14)
 
 ___
 
@@ -118,7 +118,7 @@ ___
 
 #### Defined in
 
-[aassets/atomicTypes.ts:15](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/aassets/atomicTypes.ts#L15)
+[aassets/atomicTypes.ts:15](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/aassets/atomicTypes.ts#L15)
 
 ___
 
@@ -128,4 +128,4 @@ ___
 
 #### Defined in
 
-[aassets/atomicTypes.ts:19](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/aassets/atomicTypes.ts#L19)
+[aassets/atomicTypes.ts:19](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/aassets/atomicTypes.ts#L19)

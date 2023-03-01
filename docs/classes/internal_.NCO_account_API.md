@@ -33,7 +33,7 @@
 
 #### Defined in
 
-[L1/accounts.ts:20](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/accounts.ts#L20)
+[L1/accounts.ts:20](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/accounts.ts#L20)
 
 ## Methods
 
@@ -55,7 +55,7 @@
 
 #### Defined in
 
-[L1/accounts.ts:29](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/accounts.ts#L29)
+[L1/accounts.ts:29](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/accounts.ts#L29)
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 #### Defined in
 
-[L1/accounts.ts:94](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/accounts.ts#L94)
+[L1/accounts.ts:94](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/accounts.ts#L94)
 
 ___
 
@@ -100,7 +100,7 @@ NCReturnTxs
 
 #### Defined in
 
-[L1/accounts.ts:61](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/accounts.ts#L61)
+[L1/accounts.ts:61](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/accounts.ts#L61)
 
 ___
 
@@ -122,7 +122,7 @@ An EOS key pair
 
 #### Defined in
 
-[L1/accounts.ts:47](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/accounts.ts#L47)
+[L1/accounts.ts:47](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/accounts.ts#L47)
 
 ___
 
@@ -147,7 +147,7 @@ Create permission transaction id
 
 #### Defined in
 
-[L1/accounts.ts:111](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/accounts.ts#L111)
+[L1/accounts.ts:111](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/accounts.ts#L111)
 
 ___
 
@@ -171,4 +171,4 @@ Link permission transaction id
 
 #### Defined in
 
-[L1/accounts.ts:128](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/accounts.ts#L128)
+[L1/accounts.ts:128](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/accounts.ts#L128)

@@ -39,7 +39,7 @@
 
 #### Defined in
 
-[utils.ts:11](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/utils.ts#L11)
+[utils.ts:11](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/utils.ts#L11)
 
 ## Methods
 
@@ -59,7 +59,7 @@
 
 #### Defined in
 
-[utils.ts:43](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/utils.ts#L43)
+[utils.ts:43](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/utils.ts#L43)
 
 ___
 
@@ -79,7 +79,7 @@ ___
 
 #### Defined in
 
-[utils.ts:25](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/utils.ts#L25)
+[utils.ts:25](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/utils.ts#L25)
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 #### Defined in
 
-[utils.ts:57](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/utils.ts#L57)
+[utils.ts:57](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/utils.ts#L57)
 
 ___
 
@@ -121,7 +121,7 @@ ___
 
 #### Defined in
 
-[utils.ts:63](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/utils.ts#L63)
+[utils.ts:63](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/utils.ts#L63)
 
 ___
 
@@ -143,7 +143,7 @@ ___
 
 #### Defined in
 
-[utils.ts:51](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/utils.ts#L51)
+[utils.ts:51](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/utils.ts#L51)
 
 ___
 
@@ -163,7 +163,7 @@ ___
 
 #### Defined in
 
-[utils.ts:73](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/utils.ts#L73)
+[utils.ts:73](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/utils.ts#L73)
 
 ___
 
@@ -183,7 +183,7 @@ ___
 
 #### Defined in
 
-[utils.ts:69](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/utils.ts#L69)
+[utils.ts:69](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/utils.ts#L69)
 
 ___
 
@@ -203,7 +203,7 @@ ___
 
 #### Defined in
 
-[utils.ts:39](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/utils.ts#L39)
+[utils.ts:39](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/utils.ts#L39)
 
 ___
 
@@ -223,7 +223,7 @@ ___
 
 #### Defined in
 
-[utils.ts:21](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/utils.ts#L21)
+[utils.ts:21](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/utils.ts#L21)
 
 ___
 
@@ -243,7 +243,7 @@ ___
 
 #### Defined in
 
-[utils.ts:30](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/utils.ts#L30)
+[utils.ts:30](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/utils.ts#L30)
 
 ___
 
@@ -263,7 +263,7 @@ ___
 
 #### Defined in
 
-[utils.ts:34](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/utils.ts#L34)
+[utils.ts:34](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/utils.ts#L34)
 
 ___
 
@@ -284,4 +284,4 @@ ___
 
 #### Defined in
 
-[utils.ts:16](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/utils.ts#L16)
+[utils.ts:16](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/utils.ts#L16)

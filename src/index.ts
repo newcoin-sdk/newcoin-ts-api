@@ -76,19 +76,25 @@ import { NCInit, NCInitUrls, NCInitServices, devnet_urls, devnet_urls_prod, devn
  */
 export class NCO_BlockchainAPI {
 
+  
   //@ts-ignore
   private urls: NCInitUrls;
   private services: NCInitServices;
   private debug: boolean = false;
-  
+
+
   static defaults = {
     devnet_services,
     devnet_urls,
     devnet_urls_prod
   };
 
-  static system_names = {
-  };
+  static dev_init_arg: NCInit = {
+    services: this.defaults.devnet_services,
+    urls: this.defaults.devnet_urls,
+    debug: true,
+    is_proxy: false
+  }
 
   public daos:       NCO_daos_API;
   public pools:      NCO_pools_API;
@@ -226,7 +232,6 @@ export class NCO_BlockchainAPI {
 
   }
 
-
   async mintLike(inpt: NCMintLike ) {
     // todo if no schema then create it
 
@@ -254,7 +259,6 @@ export class NCO_BlockchainAPI {
     return resp;
   }
 
-
   async createBadgeTemplate(name: string, key: string, col?: string, sch?: string)
   {
     let xferable = true; // badges can be transferrable for collateral, burnability etc
@@ -279,7 +283,7 @@ export class NCO_BlockchainAPI {
 
   }
 
-async mintBadge(inpt: NCMintBadge ) {
+  async mintBadge(inpt: NCMintBadge ) {
   // todo if no schema then create it
 
   const tId = await this.utils.getLinkSchemaBadgeTemplateID(inpt.issuer);
@@ -303,7 +307,7 @@ async mintBadge(inpt: NCMintBadge ) {
   };
   let resp = await this.assets.mintAsset(s);      
   return resp;
-}
+  }
 
   // @ts-ignore
   static private const STATUS_LIST = {
@@ -511,7 +515,6 @@ async mintBadge(inpt: NCMintBadge ) {
 
   }
 
-
   async swapNcoToCreatorCoin( inpt: NCSwapNCOtoCC ) { 
     console.log("trying to swap to GNCO :  " + inpt.amt);
     this.debug = true;
@@ -549,7 +552,6 @@ async mintBadge(inpt: NCMintBadge ) {
     return resp2;
   }
   
-
   /**
  * Get pool info
  * @param 
@@ -695,5 +697,6 @@ async mintBadge(inpt: NCMintBadge ) {
  async txGNCOBalance(inpt: NCTxBal) { return this.txer.txGNCOBalance(inpt); }
  async getAccountBalance(inpt: NCGetAccInfo) {return this.txer.getAccountBalance(inpt); }
 
+ async normmalizeUserName(name: string, r: string) { return this.utils.normalizeUsername(name, r); }
 
 }

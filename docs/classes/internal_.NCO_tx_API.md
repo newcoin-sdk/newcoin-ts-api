@@ -32,7 +32,7 @@
 
 #### Defined in
 
-[L1/transfers.ts:17](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/transfers.ts#L17)
+[L1/transfers.ts:17](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/transfers.ts#L17)
 
 ## Methods
 
@@ -57,7 +57,7 @@ Transfer transaction id
 
 #### Defined in
 
-[L1/transfers.ts:70](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/transfers.ts#L70)
+[L1/transfers.ts:70](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/transfers.ts#L70)
 
 ___
 
@@ -81,7 +81,7 @@ Tx data
 
 #### Defined in
 
-[L1/transfers.ts:33](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/transfers.ts#L33)
+[L1/transfers.ts:33](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/transfers.ts#L33)
 
 ___
 
@@ -105,7 +105,7 @@ Transfer transaction id
 
 #### Defined in
 
-[L1/transfers.ts:108](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/transfers.ts#L108)
+[L1/transfers.ts:108](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/transfers.ts#L108)
 
 ___
 
@@ -129,7 +129,7 @@ Transfer transaction id
 
 #### Defined in
 
-[L1/transfers.ts:97](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/transfers.ts#L97)
+[L1/transfers.ts:97](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/transfers.ts#L97)
 
 ___
 
@@ -153,4 +153,4 @@ Transfer transaction id
 
 #### Defined in
 
-[L1/transfers.ts:86](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/transfers.ts#L86)
+[L1/transfers.ts:86](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/transfers.ts#L86)

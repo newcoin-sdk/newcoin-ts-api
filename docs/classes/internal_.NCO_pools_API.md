@@ -34,7 +34,7 @@
 
 #### Defined in
 
-[L1/pools.ts:29](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/pools.ts#L29)
+[L1/pools.ts:29](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/pools.ts#L29)
 
 ## Methods
 
@@ -56,7 +56,7 @@
 
 #### Defined in
 
-[L1/pools.ts:41](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/pools.ts#L41)
+[L1/pools.ts:41](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/pools.ts#L41)
 
 ___
 
@@ -83,7 +83,7 @@ Create Pool transaction id
 
 #### Defined in
 
-[L1/pools.ts:127](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/pools.ts#L127)
+[L1/pools.ts:127](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/pools.ts#L127)
 
 ___
 
@@ -107,7 +107,7 @@ NCReturnTxs
 
 #### Defined in
 
-[L1/pools.ts:101](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/pools.ts#L101)
+[L1/pools.ts:101](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/pools.ts#L101)
 
 ___
 
@@ -131,7 +131,7 @@ NCReturnTxs
 
 #### Defined in
 
-[L1/pools.ts:78](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/pools.ts#L78)
+[L1/pools.ts:78](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/pools.ts#L78)
 
 ___
 
@@ -151,7 +151,7 @@ ___
 
 #### Defined in
 
-[L1/pools.ts:61](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/pools.ts#L61)
+[L1/pools.ts:61](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/pools.ts#L61)
 
 ___
 
@@ -175,7 +175,7 @@ Create Pool transaction id
 
 #### Defined in
 
-[L1/pools.ts:156](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/pools.ts#L156)
+[L1/pools.ts:156](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/pools.ts#L156)
 
 ___
 
@@ -199,4 +199,4 @@ Create Pool transaction id
 
 #### Defined in
 
-[L1/pools.ts:192](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/pools.ts#L192)
+[L1/pools.ts:192](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/pools.ts#L192)

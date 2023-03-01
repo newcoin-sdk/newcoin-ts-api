@@ -67,7 +67,7 @@
 
 #### Defined in
 
-[L1/actions.ts:5](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/actions.ts#L5)
+[L1/actions.ts:5](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/actions.ts#L5)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 #### Defined in
 
-[L1/actions.ts:3](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/actions.ts#L3)
+[L1/actions.ts:3](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/actions.ts#L3)
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 #### Defined in
 
-[system.ts:2](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/system.ts#L2)
+[system.ts:2](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/system.ts#L2)
 
 ___
 
@@ -125,7 +125,7 @@ ___
 
 #### Defined in
 
-[system.ts:16](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/system.ts#L16)
+[system.ts:16](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/system.ts#L16)
 
 ___
 
@@ -144,7 +144,7 @@ ___
 
 #### Defined in
 
-[system.ts:9](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/system.ts#L9)
+[system.ts:9](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/system.ts#L9)
 
 ___
 
@@ -166,7 +166,7 @@ ___
 
 #### Defined in
 
-[types.ts:308](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L308)
+[types.ts:308](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/types.ts#L308)
 
 ___
 
@@ -188,7 +188,7 @@ ___
 
 #### Defined in
 
-[types.ts:296](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L296)
+[types.ts:296](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/types.ts#L296)
 
 ___
 
@@ -208,7 +208,7 @@ ___
 
 #### Defined in
 
-[types.ts:277](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L277)
+[types.ts:277](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/types.ts#L277)
 
 ___
 
@@ -232,7 +232,7 @@ ___
 
 #### Defined in
 
-[types.ts:110](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L110)
+[types.ts:110](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/types.ts#L110)
 
 ___
 
@@ -251,4 +251,4 @@ ___
 
 #### Defined in
 
-[types.ts:130](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/types.ts#L130)
+[types.ts:130](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/types.ts#L130)

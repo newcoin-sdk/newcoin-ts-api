@@ -15,13 +15,11 @@ import {
     NCMintAsset, NCMintFile, NCTxNcoBal, NCTxBal,
     NCGetAccInfo, 
     NCReturnTxs, NCReturnInfo,NCGetDaoWhiteList,
-    NCChangeFile,
-    NCBuyRam,
+    NCChangeFile, NCBuyRam,
     NCSwapNCOtoCC,
-    NCMintNftToRoot,
-    NCMintLike,
-    NCMintBadge
-    //NCBuyRam
+    NCMintNftToRoot, NCMintLike, NCMintBadge,
+    //@ts-ignore
+    NCMintProfile
 } from "../../src/types";
 
 import {
@@ -402,7 +400,7 @@ const api = new NCO_BlockchainAPI(
 
             let start = new Date();
             let end = start;
-            start = new Date(start.setSeconds(start.getSeconds() + 10)); 
+            start = new Date(start.setSeconds(start.getSeconds() + 15)); 
             end   = new Date(end.setSeconds(end.getSeconds() + 27));
 
             let n: NCCreateDaoUserWhitelistProposal = { 
@@ -532,7 +530,7 @@ const api = new NCO_BlockchainAPI(
             let start = new Date();
             let end = start;
 
-            start = new Date(start.setSeconds(start.getSeconds() + 10)); 
+            start = new Date(start.setSeconds(start.getSeconds() + 15)); 
             end   = new Date(end.setSeconds(start.getSeconds() + 20));
             console.log("start vote: " + start);
             console.log("end vote: " + end);
@@ -895,6 +893,25 @@ const api = new NCO_BlockchainAPI(
             expect(typeof resp.TxID_mintFile).toBe('string');
         }, 60000);
 
+        it("create profile", async () => {
+            //let test = "test string 0xcafefeed ".repeat(10);
+
+            /*let n: NCMintProfile = { 
+                creator: name,
+                payer: name,  
+                payer_prv_key: prv_key_active, 
+                //subj_type: "account",
+                //subj_name: "io",
+                //value: "0"
+            };
+            
+            let resp : NCReturnTxs = await api.mintProfile(n) as NCReturnTxs;
+            asset_id = resp.asset_id as string;
+            console.log(resp);
+            expect(typeof resp.TxID_mintAsset).toBe('string');*/
+        }, 60000);
+
+
         it("modify and read file",async () => {
             
             let test = "new test string 0xcafefeed ".repeat(3);
@@ -919,7 +936,6 @@ const api = new NCO_BlockchainAPI(
             expect(typeof resp.TxID_changeFile).toBe('string');
 
         },30000);
-
         
         it("mint like",async () => {
             //let test = "test string 0xcafefeed ".repeat(10);

@@ -31,7 +31,7 @@
 
 #### Defined in
 
-[L1/assets.ts:22](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/assets.ts#L22)
+[L1/assets.ts:22](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/assets.ts#L22)
 
 ## Methods
 
@@ -53,7 +53,7 @@
 
 #### Defined in
 
-[L1/assets.ts:33](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/assets.ts#L33)
+[L1/assets.ts:33](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/assets.ts#L33)
 
 ___
 
@@ -77,7 +77,7 @@ Create Collection and template transactions' ids
 
 #### Defined in
 
-[L1/assets.ts:50](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/assets.ts#L50)
+[L1/assets.ts:50](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/assets.ts#L50)
 
 ___
 
@@ -101,7 +101,7 @@ Create Pool transaction id
 
 #### Defined in
 
-[L1/assets.ts:108](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/assets.ts#L108)
+[L1/assets.ts:108](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/assets.ts#L108)
 
 ___
 
@@ -125,4 +125,4 @@ asset id
 
 #### Defined in
 
-[L1/assets.ts:156](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/assets.ts#L156)
+[L1/assets.ts:156](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/assets.ts#L156)

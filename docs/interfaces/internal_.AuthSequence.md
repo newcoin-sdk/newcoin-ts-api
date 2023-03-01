@@ -19,7 +19,7 @@
 
 #### Defined in
 
-[aassets/atomicTypes.ts:38](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/aassets/atomicTypes.ts#L38)
+[aassets/atomicTypes.ts:38](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/aassets/atomicTypes.ts#L38)
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 #### Defined in
 
-[aassets/atomicTypes.ts:39](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/aassets/atomicTypes.ts#L39)
+[aassets/atomicTypes.ts:39](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/aassets/atomicTypes.ts#L39)
