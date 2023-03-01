@@ -9,7 +9,7 @@ it("gets standard proposals", async () => {
 }, 60000);
 
 it("gets add member proposals", async () => {
-	let resp = await api.daos.getDaoProposals({
+	let resp = await api.daos.getDaoWhitelistProposals({
 		dao_owner: "dx.io",
 		limit: 100,
 	})

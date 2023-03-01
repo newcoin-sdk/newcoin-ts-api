@@ -1,6 +1,6 @@
 // import {api, voteEnd, voteStart} from "./index";
 
-it('executes standard proposal', function () {});
+it('executes standard proposal', async function () {});
 
 it('executes add member proposal', function () {});
 
