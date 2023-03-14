@@ -33,7 +33,7 @@
 
 #### Defined in
 
-[L1/reader.ts:12](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/reader.ts#L12)
+[L1/reader.ts:12](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/reader.ts#L12)
 
 ## Methods
 
@@ -54,7 +54,7 @@
 
 #### Defined in
 
-[L1/reader.ts:32](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/reader.ts#L32)
+[L1/reader.ts:32](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/reader.ts#L32)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 #### Defined in
 
-[L1/reader.ts:56](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/reader.ts#L56)
+[L1/reader.ts:56](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/reader.ts#L56)
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 #### Defined in
 
-[L1/reader.ts:26](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/reader.ts#L26)
+[L1/reader.ts:26](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/reader.ts#L26)
 
 ___
 
@@ -116,7 +116,7 @@ ___
 
 #### Defined in
 
-[L1/reader.ts:18](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/reader.ts#L18)
+[L1/reader.ts:18](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/reader.ts#L18)
 
 ___
 
@@ -136,7 +136,7 @@ ___
 
 #### Defined in
 
-[L1/reader.ts:41](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/reader.ts#L41)
+[L1/reader.ts:41](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/reader.ts#L41)
 
 ___
 
@@ -156,4 +156,4 @@ ___
 
 #### Defined in
 
-[L1/reader.ts:49](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/reader.ts#L49)
+[L1/reader.ts:49](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/reader.ts#L49)

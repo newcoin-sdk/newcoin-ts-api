@@ -8,7 +8,7 @@ export class NCO_utils_API {
     //private aa_url;
     private reader;
 
-    constructor(n: NCInit){
+    constructor(n: NCInit) {
         //this.aa_url = n.urls.atomicassets_url;
         this.reader = new NCO_read_API(n);
     };

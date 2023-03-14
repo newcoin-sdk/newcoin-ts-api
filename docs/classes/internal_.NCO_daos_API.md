@@ -46,7 +46,7 @@
 
 #### Defined in
 
-[L1/daos.ts:28](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/daos.ts#L28)
+[L1/daos.ts:28](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/daos.ts#L28)
 
 ## Methods
 
@@ -68,7 +68,7 @@
 
 #### Defined in
 
-[L1/daos.ts:38](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/daos.ts#L38)
+[L1/daos.ts:38](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/daos.ts#L38)
 
 ___
 
@@ -90,7 +90,7 @@ NCReturnTxs.TxID_approveDaoProposal
 
 #### Defined in
 
-[L1/daos.ts:169](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/daos.ts#L169)
+[L1/daos.ts:169](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/daos.ts#L169)
 
 ___
 
@@ -112,7 +112,7 @@ NCReturnTxs.TxID_approveDaoProposal
 
 #### Defined in
 
-[L1/daos.ts:231](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/daos.ts#L231)
+[L1/daos.ts:231](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/daos.ts#L231)
 
 ___
 
@@ -134,7 +134,7 @@ NCReturnTxs.TxID_approveDaoProposal
 
 #### Defined in
 
-[L1/daos.ts:207](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/daos.ts#L207)
+[L1/daos.ts:207](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/daos.ts#L207)
 
 ___
 
@@ -158,7 +158,7 @@ NCReturnTxs.TxID_createDao, NCReturnTxs.dao_id
 
 #### Defined in
 
-[L1/daos.ts:55](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/daos.ts#L55)
+[L1/daos.ts:55](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/daos.ts#L55)
 
 ___
 
@@ -180,7 +180,7 @@ NCReturnTxs.TxID_createDaoProposal, NCReturnTxs.proposal_id
 
 #### Defined in
 
-[L1/daos.ts:84](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/daos.ts#L84)
+[L1/daos.ts:84](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/daos.ts#L84)
 
 ___
 
@@ -202,7 +202,7 @@ NCReturnTxs.TxID_createDaoProposal, NCReturnTxs.proposal_id
 
 #### Defined in
 
-[L1/daos.ts:140](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/daos.ts#L140)
+[L1/daos.ts:140](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/daos.ts#L140)
 
 ___
 
@@ -224,7 +224,7 @@ NCReturnTxs.TxID_createDaoProposal, NCReturnTxs.proposal_id
 
 #### Defined in
 
-[L1/daos.ts:112](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/daos.ts#L112)
+[L1/daos.ts:112](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/daos.ts#L112)
 
 ___
 
@@ -246,7 +246,7 @@ NCReturnTxs.TxID_executeDaoProposal
 
 #### Defined in
 
-[L1/daos.ts:255](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/daos.ts#L255)
+[L1/daos.ts:255](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/daos.ts#L255)
 
 ___
 
@@ -268,7 +268,7 @@ NCReturnTxs.TxID_executeDaoProposal
 
 #### Defined in
 
-[L1/daos.ts:297](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/daos.ts#L297)
+[L1/daos.ts:297](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/daos.ts#L297)
 
 ___
 
@@ -290,7 +290,7 @@ NCReturnTxs.TxID_executeDaoProposal
 
 #### Defined in
 
-[L1/daos.ts:277](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/daos.ts#L277)
+[L1/daos.ts:277](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/daos.ts#L277)
 
 ___
 
@@ -313,7 +313,7 @@ NCReturnTxs.TxID_createDao, NCReturnTxs.dao_id
 
 #### Defined in
 
-[L1/daos.ts:363](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/daos.ts#L363)
+[L1/daos.ts:363](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/daos.ts#L363)
 
 ___
 
@@ -333,7 +333,7 @@ ___
 
 #### Defined in
 
-[L1/daos.ts:383](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/daos.ts#L383)
+[L1/daos.ts:383](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/daos.ts#L383)
 
 ___
 
@@ -353,7 +353,7 @@ ___
 
 #### Defined in
 
-[L1/daos.ts:449](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/daos.ts#L449)
+[L1/daos.ts:449](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/daos.ts#L449)
 
 ___
 
@@ -373,7 +373,7 @@ ___
 
 #### Defined in
 
-[L1/daos.ts:485](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/daos.ts#L485)
+[L1/daos.ts:485](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/daos.ts#L485)
 
 ___
 
@@ -393,7 +393,7 @@ ___
 
 #### Defined in
 
-[L1/daos.ts:416](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/daos.ts#L416)
+[L1/daos.ts:416](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/daos.ts#L416)
 
 ___
 
@@ -413,7 +413,7 @@ ___
 
 #### Defined in
 
-[L1/daos.ts:506](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/daos.ts#L506)
+[L1/daos.ts:506](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/daos.ts#L506)
 
 ___
 
@@ -435,7 +435,7 @@ NCReturnTxs.TxID_voteDaoProposal
 
 #### Defined in
 
-[L1/daos.ts:317](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/daos.ts#L317)
+[L1/daos.ts:317](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/daos.ts#L317)
 
 ___
 
@@ -457,4 +457,4 @@ NCReturnTxs.TxID_voteDaoProposal
 
 #### Defined in
 
-[L1/daos.ts:339](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/daos.ts#L339)
+[L1/daos.ts:339](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/daos.ts#L339)

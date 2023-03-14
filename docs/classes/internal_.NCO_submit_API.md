@@ -30,7 +30,7 @@
 
 #### Defined in
 
-[L1/submit.ts:22](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/submit.ts#L22)
+[L1/submit.ts:22](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/submit.ts#L22)
 
 ## Methods
 
@@ -52,7 +52,7 @@
 
 #### Defined in
 
-[L1/submit.ts:30](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/submit.ts#L30)
+[L1/submit.ts:30](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/submit.ts#L30)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[L1/submit.ts:68](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/submit.ts#L68)
+[L1/submit.ts:68](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/submit.ts#L68)
 
 ___
 
@@ -96,4 +96,4 @@ ___
 
 #### Defined in
 
-[L1/submit.ts:41](https://github.com/newfound8ion/newcoin-sdk/blob/86b014f/src/L1/submit.ts#L41)
+[L1/submit.ts:41](https://github.com/newfound8ion/newcoin-sdk/blob/2d95cfa/src/L1/submit.ts#L41)
