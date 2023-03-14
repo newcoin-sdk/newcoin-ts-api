@@ -1,7 +1,6 @@
 
 import { TxData } from "../aassets/atomicTypes";
 const { ExplorerApi } = require("atomicassets");
-const nfetch = require("node-fetch");
 import { NCInit } from "../system";
 
 export class NCO_read_API {
@@ -17,14 +16,14 @@ export class NCO_read_API {
   // hyperion
   readTx = async (txId: string) => {
     const req = this.hyp_url + `/v2/history/get_transaction?id=${txId}`;
-    const txr = await nfetch(req);
+    const txr = await fetch(req);
     const jtxr = await txr.json();
     return jtxr as TxData;
   }
 
   //AA
   readAsset = async (asset_id: string) => {
-    const api = new ExplorerApi(this.aa_url, "atomicassets", { fetch: nfetch });
+    const api = new ExplorerApi(this.aa_url, "atomicassets", { fetch: fetch });
     const asset = await api.getAsset(asset_id);
     return asset;
   };
@@ -55,7 +54,7 @@ export class NCO_read_API {
 
   getCollectionTemplateID = async (colleciton: string, schema: string, tpl_type: string) => {
     const req = this.aa_url + `/atomicassets/v1/templates?collection_name=${colleciton}&schema_name=${schema}&template_data.link_type=${tpl_type}`;
-    const jtxr = await (await nfetch(req)).json();
+    const jtxr = await (await fetch(req)).json();
     console.log("got response " +JSON.stringify(jtxr));
     if ( jtxr.data == undefined ) return -1;
     if ( jtxr.data[0] == undefined) return -1;

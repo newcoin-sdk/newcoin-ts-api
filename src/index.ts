@@ -1,15 +1,8 @@
 // EOS imports
 import { RpcError } from "eosjs";
 import { TransactResult } from "eosjs/dist/eosjs-api-interfaces";
-
-// Extra backend services
-// import { JsonRpc as HJsonRpc } from "@eoscafe/hyperion";
-
-// Newcoin services  
-//@ts-ignore
 import { ChainApi as PoolsRpcApi } from '@newfound8ion/newcoin.pools-js'
 import { ActionGenerator as sdkActionGen, EosioActionObject } from "./L1/actions";
-//import { RpcApi as AaRpcApi } from "atomicassets";
 
 import { NCO_account_API } from "./L1/accounts";
 import { NCO_daos_API } from "./L1/daos";

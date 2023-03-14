@@ -1,3 +1,4 @@
+// @ts-nocheck
 
 import { NCInit, NCInitServices, NCInitUrls } from "../system";
 

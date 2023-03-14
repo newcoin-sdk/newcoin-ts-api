@@ -5,7 +5,7 @@ it("gets standard proposals", async () => {
 		dao_owner: "dx.io",
 		limit: 100,
 	})
-	console.log(resp);
+	console.log(resp.rows[0].vote_start, resp.rows[0].vote_end);
 }, 60000);
 
 it("gets add member proposals", async () => {
