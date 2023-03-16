@@ -59,7 +59,8 @@ test('it should approve standard proposal', async function () {
     const input = {
         approver: "dx.io",
         approver_prv_key: "5JGP9mDb1b5p6b1y8jxjVkdnzbkr1KLzJuhysVQBUMDUepfDFXh",
-        dao_id: "0",
+        dao_id: 0,
+        dao_owner: "dx.io",
         proposal_id: 11,
     }
     return await approveDaoProposal(input);
