@@ -145,7 +145,7 @@ export type NCCreateDao = {
 export type NCCreateDaoProposal = {
   proposer: string,
   proposer_prv_key: string,
-  dao_id?: string,
+  dao_id?: number | string,
   dao_owner: string,
   title: string,
   summary: string,
@@ -158,7 +158,7 @@ export type NCCreateDaoProposal = {
 export type NCCreateDaoUserWhitelistProposal = {
   proposer: string,
   proposer_prv_key: string,
-  dao_id?: string,
+  dao_id?: number,
   dao_owner: string,
   user: string,
   type: string,
@@ -170,7 +170,7 @@ export type NCCreateDaoUserWhitelistProposal = {
 export type NCCreateDaoStakeProposal = {
   proposer: string,
   proposer_prv_key: string,
-  dao_id?: string,
+  dao_id?: number,
   dao_owner: string,
   to: string,
   quantity: {
@@ -185,29 +185,26 @@ export type NCCreateDaoStakeProposal = {
 export type NCApproveDaoProposal = {
   approver: string,
   approver_prv_key: string,
-  dao_id?: number,
-  dao_owner?: string,
-  proposal_id?: number,
+  dao_id: number,
+  dao_owner: string,
+  proposal_id: number,
   proposal_author?: string
 };
 
 export type NCExecuteDaoProposal = {
   exec: string,
   exec_prv_key: string,
-  dao_id?: number,
-  dao_owner?: string,
-  proposal_id?: number,
+  dao_id: number,
+  dao_owner: string,
+  proposal_id: number,
   proposal_author?: string
-
 };
 
 export type NCGetDaoProposals = {
-  dao_id?: string,
-  dao_owner?: string,
-
-  proposal_id?: string,
+  dao_id: number,
+  proposal_id: string,
+  dao_owner: string,
   proposal_author?: string;
-  
   lower_bound?: string;
   upper_bound?: string;
   limit?: number;
@@ -217,7 +214,7 @@ export type NCGetDaoProposals = {
 export type NCDaoProposalVote = {
   voter: string;
   voter_prv_key: string;
-  dao_id?: string;
+  dao_id?: number;
   dao_owner?: string;
   proposal_id: string;
   proposal_type?: string;

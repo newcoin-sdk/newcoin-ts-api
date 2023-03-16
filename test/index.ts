@@ -1,4 +1,4 @@
-import {devnet_services, NCO_BlockchainAPI, devnet_urls} from "../../src";
+import {devnet_services, NCO_BlockchainAPI, devnet_urls} from "../src";
 import moment from "moment";
 
 const defaultStartTime = moment().add("2", "minutes");

@@ -1,17 +1,27 @@
+import {
+    NCApproveDaoProposal,
+    NCCreateDao,
+    NCCreateDaoProposal,
+    NCCreateDaoStakeProposal,
+    NCCreateDaoUserWhitelistProposal,
+    NCDaoProposalVote,
+    NCDaoWithdrawVoteDeposit,
+    NCExecuteDaoProposal,
+    NCGetDaoProposals,
+    NCGetDaoWhiteList,
+    NCGetVotes,
+    NCReturnTxs
+} from "../types";
 
-import { NCCreateDao, NCGetDaoWhiteList,
-    NCCreateDaoProposal, NCCreateDaoUserWhitelistProposal, NCCreateDaoStakeProposal,
-    NCApproveDaoProposal, NCExecuteDaoProposal, NCGetVotes,
-    NCGetDaoProposals, NCDaoProposalVote, NCDaoWithdrawVoteDeposit, NCReturnTxs } from "../types";
-
-import { TransactResult } from "eosjs/dist/eosjs-api-interfaces";
-import { ActionGenerator as DaosAG, ChainApi as DaosChainApi } from  '@newfound8ion/newcoin.daos-js'
-import { DAOPayload, GetTableRowsPayload, ProposalPayload } from  "@newfound8ion/newcoin.daos-js/dist/interfaces";
-const ecc = require("eosjs-ecc-priveos");
+import {TransactResult} from "eosjs/dist/eosjs-api-interfaces";
+import {ActionGenerator as DaosAG, ChainApi as DaosChainApi} from '@newfound8ion/newcoin.daos-js'
+import {DAOPayload, GetTableRowsPayload, ProposalPayload} from "@newfound8ion/newcoin.daos-js/dist/interfaces";
 import fetch from 'cross-fetch';
 
-import { NCO_submit_API } from "./submit"
+import {NCO_submit_API} from "./submit"
 import {NCInit, NCInitServices, NCInitUrls} from "../system";
+
+const ecc = require("eosjs-ecc-priveos");
 export { NCO_daos_API }
 
 class NCO_daos_API {
@@ -44,7 +54,6 @@ class NCO_daos_API {
             public_keys,   // testnet ["EOS5PU92CupzxWEuvTMcCNr3G69r4Vch3bmYDrczNSHx5LbNRY7NT"]
             private_keys);  // testnet ["5KdRwMUrkFssK2nUXASnhzjsN1rNNiy8bXAJoHYbBgJMLzjiXHV"])
     }
-    
     
     /**
      * DAO creation. One per account.
@@ -80,11 +89,9 @@ class NCO_daos_API {
      * @returns NCReturnTxs.TxID_createDaoProposal, NCReturnTxs.proposal_id
      */
     async createDaoProposal(inpt: NCCreateDaoProposal) {
-        const dao_id = inpt.dao_id || (await this.getDaoIdByOwner(inpt.dao_owner));
-        
         const t = await this.aGen.createProposal(
             [{ actor: inpt.proposer, permission: "active" }],
-            inpt.proposer, Number(dao_id),
+            inpt.proposer, Number(inpt.dao_id),
             inpt.title, inpt.summary,
             inpt.url, inpt.pass_rate, inpt.vote_start, inpt.vote_end
         );
@@ -94,11 +101,7 @@ class NCO_daos_API {
         
         let r: NCReturnTxs = {};
         r.TxID_createDaoProposal = res.transaction_id;
-        r.dao_id = dao_id;
-        
-        const ps = await this.getDaoProposals({...inpt, dao_id }); // r.dao_id, inpt.proposer
-        r.proposal_id = ps.rows[ps.rows.length-1].id;
-        return r;
+        r.dao_id = <string>inpt.dao_id;
     }
     
     
@@ -123,10 +126,7 @@ class NCO_daos_API {
         
         let r: NCReturnTxs = {};
         r.TxID_createDaoProposal = res.transaction_id;
-        r.dao_id = dao_id;
-        let ps = await this.getDaoWhitelistProposals({...inpt, dao_id });  //  { dao_id: dao_id, proposal_author: inpt.proposer } as NCGetDaoProposals );
-        if(this.debug) console.log("getDaoWhitelistProposal return: ", JSON.stringify(ps));
-        r.proposal_id = ps.rows[ps.rows.length - 1].id;
+        r.dao_id = <string>dao_id;
         return r;
     }
 
@@ -152,10 +152,7 @@ class NCO_daos_API {
         
         let r: NCReturnTxs = {};
         r.TxID_createDaoProposal = res.transaction_id;
-        r.dao_id = dao_id;
-        let ps = await this.getDaoStakeProposals({ ...inpt, dao_id } as NCGetDaoProposals );
-        if(this.debug) console.log("Got response: " + JSON.stringify(ps));
-        r.proposal_id = ps.rows[ps.rows.length - 1].id;
+        r.dao_id = <string>dao_id;
         return r;
     }
     
@@ -166,36 +163,22 @@ class NCO_daos_API {
      * @returns NCReturnTxs.TxID_approveDaoProposal
      */
     async approveDaoProposal(inpt: NCApproveDaoProposal) {
-        try {
-            const dao_id = inpt.dao_id || (await this.getDaoIdByOwner(inpt.dao_owner));
-            
-            console.log(`dao_owner: ${inpt.dao_owner}, dao_id: ${dao_id}`)
-            
-            if (inpt.proposal_id == undefined) throw ("Proposal undefined ID");
-            
-            console.log("Got dao_id: ", dao_id, " number: ", Number(dao_id));
-            
-            const t = await this.aGen.approveProposal(
-                [{ actor: inpt.approver, permission: "active" }],
-                inpt.approver,
-                Number(dao_id), inpt.proposal_id
-            );
-            
-            console.log("Got action:", JSON.stringify(t));
-            
-            const res = await this.SubmitTx(t,
-                [ecc.privateToPublic(inpt.approver_prv_key)], [inpt.approver_prv_key]) as TransactResult;
-            
-            let r: NCReturnTxs = {};
-            r.TxID_approveDaoProposal = res.transaction_id;
-            return r;
-            
-        } catch (ex) {
-            console.log((ex as any).message);
-            console.log(JSON.stringify(ex));
-            throw ex;
-        }
-        
+        const approveAction = await this.aGen.approveProposal(
+            [{actor: inpt.approver, permission: "active"}],
+            inpt.approver,
+            <number>(inpt.dao_id),
+            inpt.proposal_id
+        );
+
+        const { transaction_id } = await this.SubmitTx(
+            approveAction,
+            [ecc.privateToPublic(inpt.approver_prv_key)],
+            [inpt.approver_prv_key]
+        ) as TransactResult;
+
+        let r: NCReturnTxs = transaction_id ? { TxID_approveDaoProposal: transaction_id } : {};
+        return r;
+
     }
     
     /**
@@ -320,7 +303,7 @@ class NCO_daos_API {
         const t = await this.aGen.vote(
             [{ actor: inpt.voter, permission: "active" }],
             inpt.voter, inpt.quantity, inpt.proposal_type || "standart",
-            dao_id, inpt.proposal_id, inpt.option
+            <string>dao_id, inpt.proposal_id, inpt.option
         );
         
         if(this.debug) console.log("Vote for DAO proposal: ", JSON.stringify(t));
