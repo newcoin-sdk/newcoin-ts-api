@@ -51,6 +51,7 @@ it("creates stake proposal", async () => {
 		quantity: {contract: "pool.nco", quantity: "1.0000 GNCO"},
 		to: "vectornew.io",
 		dao_owner: "dx.io",
+		dao_id: 0,
 		pass_rate: 5,
 		proposer: "dx.io",
 		proposer_prv_key: "5JGP9mDb1b5p6b1y8jxjVkdnzbkr1KLzJuhysVQBUMDUepfDFXh",

@@ -170,7 +170,7 @@ export type NCCreateDaoUserWhitelistProposal = {
 export type NCCreateDaoStakeProposal = {
   proposer: string,
   proposer_prv_key: string,
-  dao_id?: number,
+  dao_id: number,
   dao_owner: string,
   to: string,
   quantity: {

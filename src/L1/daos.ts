@@ -137,11 +137,9 @@ class NCO_daos_API {
      * @returns NCReturnTxs.TxID_createDaoProposal, NCReturnTxs.proposal_id
      */
     async createDaoStakeProposal(inpt: NCCreateDaoStakeProposal) {
-        const dao_id = inpt.dao_id || (await this.getDaoIdByOwner(inpt.dao_owner));
-        
         const t = await this.aGen.createStakeProposal(
             [{ actor: inpt.proposer, permission: "active" }],
-            inpt.proposer, Number(dao_id),
+            inpt.proposer, inpt.dao_id,
             inpt.to, inpt.quantity,inpt.pass_rate,
             inpt.vote_start, inpt.vote_end
         );
@@ -152,7 +150,7 @@ class NCO_daos_API {
         
         let r: NCReturnTxs = {};
         r.TxID_createDaoProposal = res.transaction_id;
-        r.dao_id = <string>dao_id;
+        r.dao_id = <string><unknown>inpt.dao_id;
         return r;
     }
     
