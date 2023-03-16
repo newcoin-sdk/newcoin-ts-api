@@ -1,19 +1,21 @@
-import { api } from "../index";
+import { api } from "../../index";
 
-it("approves standard proposal", async () => {
+it("approves standard proposal", async function () {
 	let resp = await api.daos.approveDaoProposal({
+		dao_id: 0,
 		dao_owner: "dx.io",
 		approver: "dx.io",
 		approver_prv_key: "5JGP9mDb1b5p6b1y8jxjVkdnzbkr1KLzJuhysVQBUMDUepfDFXh",
-		proposal_id: 0
+		proposal_id: 3
 	})
 	console.log(resp);
 }, 60000)
 
 // you must whitelist yourself, and this user is already whitelisted
 // no current add member proposals
-it("approves add member proposal", async () => {
+it("approves add member proposal", async function () {
 	let resp = await api.daos.approveDaoWhitelistProposal({
+		dao_id: 0,
 		dao_owner: "dx.io",
 		approver: "dx.io",
 		approver_prv_key: "5JGP9mDb1b5p6b1y8jxjVkdnzbkr1KLzJuhysVQBUMDUepfDFXh",
@@ -23,8 +25,9 @@ it("approves add member proposal", async () => {
 }, 6000);
 
 // it says proposal can not be approved
-it("approves remove member proposal", async () => {
+it("approves remove member proposal", async function () {
 	let resp = await api.daos.approveRemoveMemberProposal({
+		dao_id: 0,
 		dao_owner: "dx.io",
 		approver: "dx.io",
 		approver_prv_key: "5JGP9mDb1b5p6b1y8jxjVkdnzbkr1KLzJuhysVQBUMDUepfDFXh",
@@ -33,8 +36,9 @@ it("approves remove member proposal", async () => {
 	console.log(resp);
 }, 6000);
 
-it("approves stake proposal", async () => {
+it("approves stake proposal", async function () {
 	let resp = await api.daos.approveDaoStakeProposal({
+		dao_id: 0,
 		dao_owner: "dx.io",
 		approver: "dx.io",
 		approver_prv_key: "5JGP9mDb1b5p6b1y8jxjVkdnzbkr1KLzJuhysVQBUMDUepfDFXh",

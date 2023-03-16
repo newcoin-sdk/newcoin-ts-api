@@ -1,4 +1,4 @@
-import {api} from "../index";
+import {api} from "../../index";
 
 it("gets standard proposals", async () => {
 	let resp = await api.daos.getDaoProposals({

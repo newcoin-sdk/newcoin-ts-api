@@ -1,4 +1,4 @@
-import {api, voteEnd, voteStart} from "../index";
+import {api, voteEnd, voteStart} from "../../index";
 
 // it("creates dao", async () => {}, 60000);
 
@@ -8,10 +8,10 @@ it("creates standard proposal", async () => {
 		pass_rate: 5,
 		proposer: "dx.io",
 		proposer_prv_key: "5JGP9mDb1b5p6b1y8jxjVkdnzbkr1KLzJuhysVQBUMDUepfDFXh",
-		summary: "test3",
-		title: "test3",
-		vote_end: voteStart,
-		vote_start: voteEnd,
+		summary: "thursday test",
+		title: "new test just dropped",
+		vote_end: voteEnd,
+		vote_start: voteStart,
 		url: "//"
 	})
 	console.log(resp);
@@ -25,8 +25,8 @@ it("creates add member proposal", async () => {
 		pass_rate: 5,
 		proposer: "dx.io",
 		proposer_prv_key: "5JGP9mDb1b5p6b1y8jxjVkdnzbkr1KLzJuhysVQBUMDUepfDFXh",
-		vote_end: voteStart,
-		vote_start: voteEnd,
+		vote_end: voteEnd,
+		vote_start: voteStart,
 		user: "dx.io",
 		type: "custodian"
 	})
