@@ -1,4 +1,4 @@
-[@newfound8ion/newcoin-sdk](../README.md) / [Exports](../modules.md) / <internal\>
+[newcoin-ts-api](../README.md) / [Exports](../modules.md) / <internal\>
 
 # Namespace: <internal\>
 

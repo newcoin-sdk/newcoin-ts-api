@@ -1,4 +1,4 @@
-[@newfound8ion/newcoin-sdk](../README.md) / [Exports](../modules.md) / NCO\_BlockchainAPI
+[newcoin-ts-api](../README.md) / [Exports](../modules.md) / NCO\_BlockchainAPI
 
 # Class: NCO\_BlockchainAPI
 

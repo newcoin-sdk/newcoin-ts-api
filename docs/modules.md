@@ -1,6 +1,6 @@
-[@newfound8ion/newcoin-sdk](README.md) / Exports
+[newcoin-ts-api](README.md) / Exports
 
-# @newfound8ion/newcoin-sdk
+# newcoin-ts-api
 
 ## Table of contents
 

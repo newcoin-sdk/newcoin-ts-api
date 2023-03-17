@@ -1,4 +1,4 @@
-[@newfound8ion/newcoin-sdk](../README.md) / [Exports](../modules.md) / [<internal\>](../modules/internal_.md) / AuthSequence
+[newcoin-ts-api](../README.md) / [Exports](../modules.md) / [<internal\>](../modules/internal_.md) / AuthSequence
 
 # Interface: AuthSequence
 

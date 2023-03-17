@@ -1,4 +1,4 @@
-@newfound8ion/newcoin-sdk / [Exports](modules.md)
+newcoin-ts-api / [Exports](modules.md)
 
 # newcoin-sdk
 
@@ -6,7 +6,7 @@
 This is the newcoin sdk, a starting point for a tooling environment that will make it easy to build applications on top of [https://newcoin.org](newcoin.org).
 
 ``` typescript
-npm install --save @newfound8ion/newcoin-sdk
+npm install --save newcoin-ts-api
 ```
 
 See [https://docs.newcoin.org/](https://docs.newcoin.org/) for an overview of the newcoin ecosystem.
