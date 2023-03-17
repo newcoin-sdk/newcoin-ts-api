@@ -1,5 +1,7 @@
 node_modules
 .serverless
 .vscode
+.env
+.idea
 dist
 .DS_Store
