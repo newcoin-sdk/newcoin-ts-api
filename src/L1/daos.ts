@@ -88,7 +88,7 @@ class NCO_daos_API {
      * @param inpt : NCCreateDaoProposal
      * @returns NCReturnTxs.TxID_createDaoProposal, NCReturnTxs.proposal_id
      */
-    async createDaoProposal(inpt: NCCreateDaoProposal) {
+    async createDaoStandardProposal(inpt: NCCreateDaoProposal) {
         const t = await this.aGen.createProposal(
             [{ actor: inpt.proposer, permission: "active" }],
             inpt.proposer, Number(inpt.dao_id),
@@ -110,7 +110,7 @@ class NCO_daos_API {
      * @param inpt : NCCreateDaoUserWhitelistProposal
      * @returns NCReturnTxs.TxID_createDaoProposal, NCReturnTxs.proposal_id
      */
-    async createDaoUserWhitelistProposal(inpt: NCCreateDaoUserWhitelistProposal) {
+    async createDaoAddMemberProposal(inpt: NCCreateDaoUserWhitelistProposal) {
         const dao_id = inpt.dao_id || (await this.getDaoIdByOwner(inpt.dao_owner));
         
         const t = await this.aGen.createWhiteListProposal(
@@ -130,6 +130,29 @@ class NCO_daos_API {
         return r;
     }
 
+    async createDaoRemoveMemberProposal(inpt: any) {
+        const dao_id = inpt.dao_id || (await this.getDaoIdByOwner(inpt.dao_owner));
+
+        const t = await this.aGen.createRemoveWhiteListProposal(
+            [{ actor: inpt.proposer, permission: "active" }],
+            inpt.proposer, Number(dao_id),
+            inpt.user, inpt.pass_rate,
+            inpt.vote_start, inpt.vote_end
+        );
+
+        const res = await this.SubmitTx(t,
+            [],
+            [inpt.proposer_prv_key]) as TransactResult;
+
+        let r: NCReturnTxs = {};
+        r.TxID_removeFromWhiteList = res.transaction_id;
+        r.dao_id = <string>dao_id;
+        let ps = await this.getDaoRemoveMemberProposals({...inpt } as unknown as NCGetDaoProposals );
+        // r.proposals = ps;
+        if(this.debug) console.log("Got response: " + JSON.stringify(ps));
+        r.proposal_id = ps.rows[ps.rows.length - 1].id;
+        return r;
+    }
     
     /**
      *
@@ -160,7 +183,7 @@ class NCO_daos_API {
      * @param inpt : NCApproveDaoProposal
      * @returns NCReturnTxs.TxID_approveDaoProposal
      */
-    async approveDaoProposal(inpt: NCApproveDaoProposal) {
+    async approveDaoStandardProposal(inpt: NCApproveDaoProposal) {
         const approveAction = await this.aGen.approveProposal(
             [{actor: inpt.approver, permission: "active"}],
             inpt.approver,
@@ -184,7 +207,7 @@ class NCO_daos_API {
      * @param inpt : NCApproveDaoProposal
      * @returns NCReturnTxs.TxID_approveDaoProposal
      */
-    async approveDaoWhitelistProposal(inpt: NCApproveDaoProposal) {
+    async approveDaoAddMemberProposal(inpt: NCApproveDaoProposal) {
         const dao_id = inpt.dao_id || (await this.getDaoIdByOwner(inpt.dao_owner));
         
         if (inpt.proposal_id == undefined) throw ("Proposal undefined ID");
@@ -202,7 +225,30 @@ class NCO_daos_API {
         r.TxID_approveDaoProposal = res.transaction_id;
         return r;
     }
-    
+    /**
+     *
+     * @param inpt : NCApproveDaoProposal
+     * @returns NCReturnTxs.TxID_approveDaoProposal
+     */
+    async approveDaoRemoveMemberProposal(inpt: NCApproveDaoProposal) {
+        const dao_id = inpt.dao_id || (await this.getDaoIdByOwner(inpt.dao_owner));
+
+        if (inpt.proposal_id == undefined) throw ("Proposal undefined ID");
+
+        const t = await this.aGen.approveWhiteListProposal(
+            [{ actor: inpt.approver, permission: "active" }],
+            inpt.approver,
+            Number(dao_id), inpt.proposal_id
+        );
+
+        const res = await this.SubmitTx(t,
+            [ecc.privateToPublic(inpt.approver_prv_key)], [inpt.approver_prv_key]) as TransactResult;
+
+        let r: NCReturnTxs = {};
+        r.TxID_approveDaoProposal = res.transaction_id;
+        return r;
+    }
+
     /**
      *
      * @param inpt : NCApproveDaoProposal
@@ -232,7 +278,7 @@ class NCO_daos_API {
      * @param inpt : NCExecuteDaoProposal
      * @returns NCReturnTxs.TxID_executeDaoProposal
      */
-    async executeDaoProposal(inpt: NCExecuteDaoProposal) {
+    async executeDaoStandardProposal(inpt: NCExecuteDaoProposal) {
         const dao_id = inpt.dao_id || (await this.getDaoIdByOwner(inpt.dao_owner));
         
         if (inpt.proposal_id == undefined) throw ("Proposal ID undefined");
@@ -254,7 +300,7 @@ class NCO_daos_API {
      * @param inpt : NCExecuteDaoProposal
      * @returns NCReturnTxs.TxID_executeDaoProposal
      */
-    async executeDaoWhitelistProposal(inpt: NCExecuteDaoProposal) {
+    async executeDaoRemoveMemberProposal(inpt: NCExecuteDaoProposal) {
         const dao_id = inpt.dao_id || (await this.getDaoIdByOwner(inpt.dao_owner));
         
         if (inpt.proposal_id == undefined) throw ("Proposal ID undefined");
@@ -265,6 +311,26 @@ class NCO_daos_API {
         
         const res = await this.SubmitTx(t, [], [inpt.exec_prv_key]) as TransactResult;
         
+        let r: NCReturnTxs = {};
+        r.TxID_executeDaoProposal = res.transaction_id;
+        return r;
+    }
+
+    /**
+     * @param inpt : NCExecuteDaoProposal
+     * @returns NCReturnTxs.TxID_executeDaoProposal
+     */
+    async executeDaoAddMemberProposal(inpt: NCExecuteDaoProposal) {
+        const dao_id = inpt.dao_id || (await this.getDaoIdByOwner(inpt.dao_owner));
+
+        if (inpt.proposal_id == undefined) throw ("Proposal ID undefined");
+
+        const t = await this.aGen.executeWhiteListProposal(
+            [{ actor: inpt.exec, permission: "active" }], Number(dao_id), inpt.proposal_id
+        );
+
+        const res = await this.SubmitTx(t, [], [inpt.exec_prv_key]) as TransactResult;
+
         let r: NCReturnTxs = {};
         r.TxID_executeDaoProposal = res.transaction_id;
         return r;
@@ -331,97 +397,8 @@ class NCO_daos_API {
         //if(this.debug) console.log("received from withdraw: " + JSON.stringify(res));
         return { TxID_WithdrawVoteDeposit: res.transaction_id } as NCReturnTxs;
     }
-    
-    
-    
 
-    // @ts-ignore
-    async removeMemberProposal (inpt) {
-        const dao_id = inpt.dao_id || (await this.getDaoIdByOwner(inpt.dao_owner));
-        
-        const t = await this.aGen.createRemoveWhiteListProposal(
-            [{ actor: inpt.proposer, permission: "active" }],
-            inpt.proposer, Number(dao_id),
-            inpt.user, inpt.pass_rate,
-            inpt.vote_start, inpt.vote_end
-        );
-        
-        const res = await this.SubmitTx(t,
-            [],
-            [inpt.proposer_prv_key]) as TransactResult;
-        
-        let r: NCReturnTxs = {};
-        r.TxID_removeFromWhiteList = res.transaction_id;
-        r.dao_id = dao_id;
-        let ps = await this.getDaoMemberRemoveProposals({ ...inpt, dao_id } as NCGetDaoProposals );
-        // r.proposals = ps;
-        if(this.debug) console.log("Got response: " + JSON.stringify(ps));
-        r.proposal_id = ps.rows[ps.rows.length - 1].id;
-        return r;
-    }
-    // daos end
-    
-      /**
-     * @param input 
-     * 
-     */
-      async approveRemoveMemberProposal(inpt: NCApproveDaoProposal) {
-        
-        try {
-            const dao_id = inpt.dao_id || (await this.getDaoIdByOwner(inpt.dao_owner));
 
-            console.log(`dao_owmer: ${inpt.dao_owner}, dao_id: ${dao_id}`);
-
-            if (inpt.proposal_id == undefined) throw ("Proposal ID undefined");
-
-            console.log("Got dao_id: ", dao_id, " number: ", Number(dao_id));
-
-            const t = await this.aGen.approveProposal(
-                [{actor: inpt.approver, permission: "active"}],
-                inpt.approver,
-                Number(dao_id), inpt.proposal_id
-            );
-
-            console.log("Got action: ", JSON.stringify(t));
-
-            const res = await this.SubmitTx(t, 
-                [ecc.privateToPublic(inpt.approver_prv_key)],
-                [inpt.approver_prv_key]) as TransactResult;
-            
-                let r: NCReturnTxs = {};
-                r.TxID_approveDaoProposal = res.transaction_id;
-
-                return r;
-
-        } catch(e) {
-            console.log((e as any).message);
-            console.log(JSON.stringify(e));
-
-            throw e;
-        }
-    }
-
-    async executeRemoveMemberProposal(inpt: NCExecuteDaoProposal) {
-        
-        const dao_id = inpt.dao_id || (await this.getDaoIdByOwner(inpt.dao_owner));
-
-        if (inpt.proposal_id == undefined) throw ("Proposal ID undefined");
-
-        const t = await this.aGen.executeRemoveWhiteListProposal(
-            [{actor: inpt.exec, permission: "active"}],
-            Number(dao_id),
-            inpt.proposal_id
-        );
-
-        const res = await this.SubmitTx(t, [], [inpt.exec_prv_key]) as TransactResult;
-
-        let r: NCReturnTxs = {};
-
-        r.TxID_executeDaoProposal = res.transaction_id;
-
-        return r;
-    }
-    
     /**
      * @param inpt : getDaoIdByOwner
      * @returns NCReturnTxs.TxID_createDao, NCReturnTxs.dao_id
@@ -446,7 +423,7 @@ class NCO_daos_API {
         return r;
     }
     
-    async getDaoProposals(inpt: NCGetDaoProposals) {
+    async getDaoStandardProposals(inpt: NCGetDaoProposals) {
         
         if(this.debug) console.log("Get regular DAO proposals list: ", JSON.stringify(inpt));
         const dao_id = inpt.dao_id || (await this.getDaoIdByOwner(inpt.dao_owner, true));
@@ -479,7 +456,7 @@ class NCO_daos_API {
         return { ...w, dao_id };
     }
     
-    async getDaoWhitelistProposals(inpt: NCGetDaoProposals) {
+    async getDaoAddMemberProposals(inpt: NCGetDaoProposals) {
         
         if(this.debug) console.log("Get whitelist proposal list: ", JSON.stringify(inpt));
         const dao_id = inpt.dao_id || (await this.getDaoIdByOwner(inpt.dao_owner, true));
@@ -547,7 +524,7 @@ class NCO_daos_API {
         return { ...w, dao_id };
     }
     
-    async getDaoWhitelist(inpt: NCGetDaoWhiteList) {
+    async getDaoMembers(inpt: NCGetDaoWhiteList) {
         const dao_id = inpt.dao_id || (await this.getDaoIdByOwner(inpt.dao_owner));
         //let q = await this.cApi.getDAOWhiteList({ id: inpt.dao_id as string });
         //let w = await q.json();
@@ -568,7 +545,7 @@ class NCO_daos_API {
         return { ...w, dao_id };
     }
     
-    async getVotes(inpt: NCGetVotes) {
+    async getDaoVotes(inpt: NCGetVotes) {
         let w;
         
         const opt = {
@@ -589,7 +566,7 @@ class NCO_daos_API {
         return w;
     }
     
-    async getDaoMemberRemoveProposals(inpt: NCGetDaoProposals) {
+    async getDaoRemoveMemberProposals(inpt: NCGetDaoProposals) {
         if(this.debug) console.log("Get rmv member proposal list: ", JSON.stringify(inpt));
         const dao_id = inpt.dao_id || (await this.getDaoIdByOwner(inpt.dao_owner, true));
         if(!dao_id) return { dao_id: null, comm: "could not get dao_id for this owner" };
@@ -613,5 +590,6 @@ class NCO_daos_API {
         if(this.debug) console.log("received proposal list" + JSON.stringify(w));
         return { ...w, dao_id };
     }
+
     
-};
+}

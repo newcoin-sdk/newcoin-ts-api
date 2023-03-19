@@ -2,7 +2,7 @@
 const { NCO_BlockchainAPI, devnet_services, devnet_urls } = require('../../../src');
 const {voteStart, voteEnd} = require("../../index");
 const api = new NCO_BlockchainAPI({ urls: devnet_urls, services: devnet_services, is_proxy: false, debug: true });
-import {NCApproveDaoProposal, NCCreateDaoProposal} from "../../../src";
+import {NCCreateDaoProposal} from "../../../src";
 
 test('it should perform a test call correctly', async () => {
     const keyPair = await api.createKeyPair();
@@ -21,15 +21,15 @@ async function createDaoProposal(input: NCCreateDaoProposal) {
     if (!input.vote_end) throw Error('missing vote_end')
     if (!input.url) throw Error('missing url')
     if(!input.dao_id) throw Error('missing dao_id')
-    return await api.createDaoProposal(input)
+    return await api.createDaoStandardProposal(input)
 }
 
-async function approveDaoProposal(input: NCApproveDaoProposal) {
+async function approveDaoProposal(input: { approver: string; proposal_id: number; dao_id: string; dao_owner: string; approver_prv_key: string }) {
     if (!input) throw Error('missing input')
     if (!input.approver) throw Error('missing approver')
     if (!input.approver_prv_key) throw Error('missing approver_prv_key')
     if(!input.dao_id) throw Error('missing dao_id')
-    return await api.approveDaoProposal(input)
+    return await api.approveDaoStandardProposal(input)
 }
 
 async function voteDaoProposal(args: any) {
@@ -37,7 +37,7 @@ async function voteDaoProposal(args: any) {
 }
 
 async function executeDaoProposal(args:any) {
-    return await api.executeDaoProposal(args);
+    return await api.executeDaoStandardProposal(args);
 }
 
 test('it should create standard proposal', async function () {
@@ -60,9 +60,9 @@ test('it should approve standard proposal', async function () {
     const input = {
         approver: "dx.io",
         approver_prv_key: "5JGP9mDb1b5p6b1y8jxjVkdnzbkr1KLzJuhysVQBUMDUepfDFXh",
-        dao_id: 0,
+        dao_id: "0",
         dao_owner: "dx.io",
-        proposal_id: 11,
+        proposal_id: 7,
     }
     return await approveDaoProposal(input);
 })
@@ -71,7 +71,7 @@ test('it should vote on standard proposal', async function () {
     const input = {
         voter: "dx.io",
         voter_prv_key: "5JGP9mDb1b5p6b1y8jxjVkdnzbkr1KLzJuhysVQBUMDUepfDFXh",
-        proposal_id: 12,
+        proposal_id: 7,
         proposal_type: "standart",
         quantity: "1.0000 DXDXIO",
         option: "YES",
@@ -85,7 +85,7 @@ test('it should execute standard proposal', async function () {
         exec: "dx.io",
         exec_prv_key: "5JGP9mDb1b5p6b1y8jxjVkdnzbkr1KLzJuhysVQBUMDUepfDFXh",
         dao_id: "0",
-        proposal_id: 12,
+        proposal_id: 7,
     }
     return await executeDaoProposal(input);
 })

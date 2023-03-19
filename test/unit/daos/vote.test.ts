@@ -2,7 +2,7 @@ import {api} from "../../index";
 
 it('votes on standard proposal', async function () {
     let resp = await api.daos.voteOnProposal({
-        dao_id: "0",
+        dao_id: 0,
         option: "",
         proposal_id: "1",
         proposal_type: "standart",
@@ -16,7 +16,7 @@ it('votes on standard proposal', async function () {
 
 it('votes on add member proposal', function () {
     let resp = api.daos.voteOnProposal({
-        dao_id: "0",
+        dao_id: 0,
         option: "",
         proposal_id: "1",
         proposal_type: "whitelist",
@@ -30,7 +30,7 @@ it('votes on add member proposal', function () {
 
 it('votes on remove member proposal', function () {
     let resp = api.daos.voteOnProposal({
-        dao_id: "0",
+        dao_id: 0,
         option: "",
         proposal_id: "1",
         proposal_type: "whitelist",
@@ -44,7 +44,7 @@ it('votes on remove member proposal', function () {
 
 it('votes on stake proposal', function () {
     let resp = api.daos.voteOnProposal({
-        dao_id: "0",
+        dao_id: 0,
         option: "",
         proposal_id: "1",
         proposal_type: "stake",

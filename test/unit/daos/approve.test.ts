@@ -1,7 +1,7 @@
 import { api } from "../../index";
 
 it("approves standard proposal", async function () {
-	let resp = await api.daos.approveDaoProposal({
+	let resp = await api.daos.approveDaoStandardProposal({
 		dao_id: 0,
 		dao_owner: "dx.io",
 		approver: "dx.io",
@@ -14,7 +14,7 @@ it("approves standard proposal", async function () {
 // you must whitelist yourself, and this user is already whitelisted
 // no current add member proposals
 it("approves add member proposal", async function () {
-	let resp = await api.daos.approveDaoWhitelistProposal({
+	let resp = await api.daos.approveDaoAddMemberProposal({
 		dao_id: 0,
 		dao_owner: "dx.io",
 		approver: "dx.io",
@@ -26,7 +26,7 @@ it("approves add member proposal", async function () {
 
 // it says proposal can not be approved
 it("approves remove member proposal", async function () {
-	let resp = await api.daos.approveRemoveMemberProposal({
+	let resp = await api.daos.approveDaoRemoveMemberProposal({
 		dao_id: 0,
 		dao_owner: "dx.io",
 		approver: "dx.io",

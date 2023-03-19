@@ -3,7 +3,7 @@
 import {api} from "../../index";
 
 it('executes standard proposal', async function () {
-    let resp = api.daos.executeDaoProposal({
+    let resp = api.daos.executeDaoStandardProposal({
         dao_id: 0,
         proposal_author: "",
         proposal_id: 0,

@@ -3,7 +3,7 @@ import {api, voteEnd, voteStart} from "../../index";
 // it("creates dao", async () => {}, 60000);
 
 it("creates standard proposal", async () => {
-	let resp = await api.daos.createDaoProposal({
+	let resp = await api.daos.createDaoStandardProposal({
 		dao_owner: "dx.io",
 		pass_rate: 5,
 		proposer: "dx.io",
@@ -20,7 +20,7 @@ it("creates standard proposal", async () => {
 // you must whitelist yourself, and this user is already whitelisted
 // no current add member proposals
 it("creates add member proposal", async () => {
-	let resp = await api.daos.createDaoUserWhitelistProposal({
+	let resp = await api.daos.createDaoAddMemberProposal({
 		dao_owner: "dx.io",
 		pass_rate: 5,
 		proposer: "dx.io",
@@ -34,7 +34,7 @@ it("creates add member proposal", async () => {
 }, 60000);
 
 it("creates remove member proposal", async () => {
-	let resp = await api.daos.removeMemberProposal({
+	let resp = await api.daos.createDaoRemoveMemberProposal({
 		dao_owner: "dx.io",
 		pass_rate: 5,
 		proposer: "dx.io",
