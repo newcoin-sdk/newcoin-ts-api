@@ -202,8 +202,8 @@ export type NCExecuteDaoProposal = {
 
 export type NCGetDaoProposals = {
   dao_id: number,
-  proposal_id: string,
-  dao_owner: string,
+  dao_owner?: string,
+  proposal_id?: string,
   proposal_author?: string;
   lower_bound?: string;
   upper_bound?: string;

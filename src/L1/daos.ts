@@ -112,7 +112,7 @@ class NCO_daos_API {
      */
     async createDaoAddMemberProposal(inpt: NCCreateDaoUserWhitelistProposal) {
         const dao_id = inpt.dao_id || (await this.getDaoIdByOwner(inpt.dao_owner));
-        
+
         const t = await this.aGen.createWhiteListProposal(
             [{ actor: inpt.proposer, permission: "active" }],
             inpt.proposer, Number(dao_id), inpt.user,
@@ -400,14 +400,15 @@ class NCO_daos_API {
 
 
     /**
-     * @param inpt : getDaoIdByOwner
      * @returns NCReturnTxs.TxID_createDao, NCReturnTxs.dao_id
+     * @param owner
+     * @param noFail
      */
     async getDaoIdByOwner(owner?: string, noFail?: boolean) : Promise<string> {
         if (!owner)
             throw new Error("DAO undefined");
         
-        let p: DAOPayload = { owner: owner }
+        let p: DAOPayload = { owner }
         if(this.debug) console.log("Get dao by owner: ", JSON.stringify(p));
         let q = await this.cApi.getDAOByOwner(p);
         let w = await q.json();
@@ -424,14 +425,11 @@ class NCO_daos_API {
     }
     
     async getDaoStandardProposals(inpt: NCGetDaoProposals) {
-        
-        if(this.debug) console.log("Get regular DAO proposals list: ", JSON.stringify(inpt));
         const dao_id = inpt.dao_id || (await this.getDaoIdByOwner(inpt.dao_owner, true));
-        if(!dao_id) return { dao_id: null };
-        
+
         if(inpt.proposal_author && (inpt.proposal_id == undefined))
         {
-            let w = await this.cApi.getProposalByProposer( { daoID: dao_id,  proposal_author: inpt.proposal_author } as ProposalPayload );
+            let w = await this.cApi.getProposalByProposer( { daoID: dao_id as string,  proposal_author: inpt.proposal_author } as ProposalPayload );
             inpt.proposal_id = await w.json();
         }
         
