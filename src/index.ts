@@ -670,6 +670,11 @@ export class NCO_BlockchainAPI {
  
  async createDao(inpt: NCCreateDao) { return this.daos.createDao(inpt);}
 
+  async getDaoStandardProposals(inpt: NCGetDaoProposals) { return this.daos.getDaoStandardProposals(inpt); }
+    async getDaoAddMemberProposals(inpt: NCGetDaoProposals) { return this.daos.getDaoAddMemberProposals(inpt); }
+    async getDaoRemoveMemberProposals(inpt: NCGetDaoProposals) { return this.daos.getDaoRemoveMemberProposals(inpt); }
+    async getDaoStakeProposals(inpt: NCGetDaoProposals) { return this.daos.getDaoStakeProposals(inpt); }
+
  async createDaoStandardProposal(inpt: NCCreateDaoProposal) { return this.daos.createDaoStandardProposal(inpt); }
  async createDaoAddMemberProposal(inpt: NCCreateDaoUserWhitelistProposal) { return this.daos.createDaoAddMemberProposal(inpt); }
  async createDaoStakeProposal(inpt: NCCreateDaoStakeProposal) { return this.daos.createDaoStakeProposal(inpt); }
