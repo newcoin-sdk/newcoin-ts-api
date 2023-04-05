@@ -1,11 +1,16 @@
 import {api} from "../../index";
 
+it("gets dao id by owner", async () => {
+	let resp = await api.getDaoIdByOwner("dx.io")
+	console.log(resp);
+}, 60000);
+
 it("gets standard proposals", async () => {
 	let resp = await api.getDaoStandardProposals({
 		dao_id: 0,
 		dao_owner: "dx.io",
 	})
-	console.log(resp.rows[0].vote_start, resp.rows[0].vote_end);
+	console.log(resp);
 }, 60000);
 
 it("gets add member proposals", async () => {
