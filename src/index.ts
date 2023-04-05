@@ -668,18 +668,19 @@ export class NCO_BlockchainAPI {
  async stakePool(inpt: NCStakePool) { return this.pools.stakePool(inpt); } 
  async unstakePool(inpt: NCUnstakePool) { return this.pools.unstakePool(inpt); }
  
- async createDao(inpt: NCCreateDao) { return this.daos.createDao(inpt);}
-
+  async createDao(inpt: NCCreateDao) { return this.daos.createDao(inpt);}
+  async getDaoVotes(inpt: any) { return this.daos.getDaoVotes(inpt); }
+  async getDaoIdByOwner(inpt: any) { return this.daos.getDaoIdByOwner(inpt); }
   async getDaoStandardProposals(inpt: NCGetDaoProposals) { return this.daos.getDaoStandardProposals(inpt); }
-    async getDaoAddMemberProposals(inpt: NCGetDaoProposals) { return this.daos.getDaoAddMemberProposals(inpt); }
-    async getDaoRemoveMemberProposals(inpt: NCGetDaoProposals) { return this.daos.getDaoRemoveMemberProposals(inpt); }
-    async getDaoStakeProposals(inpt: NCGetDaoProposals) { return this.daos.getDaoStakeProposals(inpt); }
-    async getDaoMembers(inpt: any) { return this.daos.getDaoMembers(inpt); }
+  async getDaoAddMemberProposals(inpt: NCGetDaoProposals) { return this.daos.getDaoAddMemberProposals(inpt); }
+  async getDaoRemoveMemberProposals(inpt: NCGetDaoProposals) { return this.daos.getDaoRemoveMemberProposals(inpt); }
+  async getDaoStakeProposals(inpt: NCGetDaoProposals) { return this.daos.getDaoStakeProposals(inpt); }
+  async getDaoMembers(inpt: any) { return this.daos.getDaoMembers(inpt); }
 
- async createDaoStandardProposal(inpt: NCCreateDaoProposal) { return this.daos.createDaoStandardProposal(inpt); }
- async createDaoAddMemberProposal(inpt: NCCreateDaoUserWhitelistProposal) { return this.daos.createDaoAddMemberProposal(inpt); }
- async createDaoStakeProposal(inpt: NCCreateDaoStakeProposal) { return this.daos.createDaoStakeProposal(inpt); }
- async createDaoRemoveMemberProposal(inpt: NCCreateDaoUserWhitelistProposal) { return this.daos.createDaoRemoveMemberProposal(inpt); }
+  async createDaoStandardProposal(inpt: NCCreateDaoProposal) { return this.daos.createDaoStandardProposal(inpt); }
+  async createDaoAddMemberProposal(inpt: NCCreateDaoUserWhitelistProposal) { return this.daos.createDaoAddMemberProposal(inpt); }
+  async createDaoStakeProposal(inpt: NCCreateDaoStakeProposal) { return this.daos.createDaoStakeProposal(inpt); }
+  async createDaoRemoveMemberProposal(inpt: NCCreateDaoUserWhitelistProposal) { return this.daos.createDaoRemoveMemberProposal(inpt); }
 
   async approveDaoStandardProposal(inpt: NCApproveDaoProposal) { return this.daos.approveDaoStandardProposal(inpt); }
   async approveDaoAddMemberProposal(inpt: NCApproveDaoProposal) { return this.daos.approveDaoAddMemberProposal(inpt); }
@@ -691,8 +692,8 @@ export class NCO_BlockchainAPI {
   async executeDaoRemoveMemberProposal(inpt: NCExecuteDaoProposal) { return this.daos.executeDaoRemoveMemberProposal(inpt); }
   async executeDaoStakeProposal(inpt: NCExecuteDaoProposal) { return this.daos.executeDaoStakeProposal(inpt);}
 
- async voteOnProposal(inpt: NCDaoProposalVote) { return this.daos.voteOnProposal(inpt) };
- async withdrawVoteDeposit(inpt: NCDaoWithdrawVoteDeposit) { return this.daos.withdrawVoteDeposit(inpt); }
+  async voteOnProposal(inpt: NCDaoProposalVote) { return this.daos.voteOnProposal(inpt) };
+  async withdrawVoteDeposit(inpt: NCDaoWithdrawVoteDeposit) { return this.daos.withdrawVoteDeposit(inpt); }
 
  async submitTx(actions: any[], public_keys: string[], private_keys: string[] ) {   return this.submitter.SubmitTx(actions,public_keys, private_keys); }
 

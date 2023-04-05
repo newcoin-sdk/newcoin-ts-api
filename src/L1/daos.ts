@@ -404,9 +404,8 @@ class NCO_daos_API {
      * @param owner
      * @param noFail
      */
-    async getDaoIdByOwner(owner?: string, noFail?: boolean) : Promise<string> {
-        if (!owner)
-            throw new Error("DAO undefined");
+    async getDaoIdByOwner(owner?: string,  noFail?: boolean) : Promise<string> {
+        if (!owner) throw new Error("DAO undefined");
         
         let p: DAOPayload = { owner }
         if(this.debug) console.log("Get dao by owner: ", JSON.stringify(p));
@@ -451,7 +450,13 @@ class NCO_daos_API {
         let w = await (await this.cApi.getTableRows( opt )).json();
         
         if(this.debug) console.log("received proposal list" + JSON.stringify(w));
-        return { ...w, dao_id };
+
+        return {
+            dao_id,
+            dao_owner: inpt.dao_owner,
+            type: "standard",
+            ...w
+        };
     }
     
     async getDaoAddMemberProposals(inpt: NCGetDaoProposals) {
