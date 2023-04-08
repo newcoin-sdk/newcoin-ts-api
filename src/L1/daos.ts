@@ -489,7 +489,12 @@ class NCO_daos_API {
         let w = await (await this.cApi.getTableRows( opt )).json();
         
         if(this.debug) console.log("received whitelist proposal list" + JSON.stringify(w));
-        return { ...w, dao_id };
+        return {
+            dao_id,
+            dao_owner: inpt.dao_owner,
+            type: "addMember",
+            ...w
+        };
     }
     
     async getDaoStakeProposals(inpt: NCGetDaoProposals) {
@@ -524,7 +529,12 @@ class NCO_daos_API {
         let w = await (await this.cApi.getTableRows( opt )).json();
         
         if(this.debug) console.log("received stake proposal list" + JSON.stringify(w));
-        return { ...w, dao_id };
+        return {
+            dao_id,
+            dao_owner: inpt.dao_owner,
+            type: "stake",
+            ...w
+        };
     }
     
     async getDaoMembers(inpt: NCGetDaoWhiteList) {
@@ -545,7 +555,12 @@ class NCO_daos_API {
         } as GetTableRowsPayload;
         let w = await (await this.cApi.getTableRows( opt )).json();
         if(this.debug) console.log("received white list" + JSON.stringify(w));
-        return { ...w, dao_id };
+        return {
+            dao_id,
+            dao_owner: inpt.dao_owner,
+            type: "members",
+            ...w
+        };
     }
     
     async getDaoVotes(inpt: NCGetVotes) {
@@ -591,7 +606,12 @@ class NCO_daos_API {
         let w = await (await this.cApi.getTableRows( opt )).json();
         
         if(this.debug) console.log("received proposal list" + JSON.stringify(w));
-        return { ...w, dao_id };
+        return {
+            dao_id,
+            dao_owner: inpt.dao_owner,
+            type: "removeMember",
+            ...w
+        };
     }
 
     
