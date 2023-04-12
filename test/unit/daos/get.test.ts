@@ -13,6 +13,15 @@ it("gets standard proposals", async () => {
 	console.log(resp);
 }, 60000);
 
+it("gets a standard proposal by id ", async () => {
+	let resp = await api.getDaoStandardProposals({
+		dao_id: 0,
+		dao_owner: "dx.io",
+		proposal_id: "1"
+	})
+	console.log(resp);
+}, 60000);
+
 it("gets add member proposals", async () => {
 	let resp = await api.getDaoAddMemberProposals({
 		dao_id: 0, proposal_id: "",
